@@ -63,7 +63,7 @@ public class RLComponent extends JComponent
     private void drawItemScreen(Graphics2D g2d) {
 	//draw background
 	g2d.setColor(new Color(100, 100, 100, 150));
-	g2d.fillRect(10, 10, 200, 300);
+	g2d.fillRect(10, 10, 200, TestGame.HEIGHT);
 
 	//draw items at player square
 	List<GameObject> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects();
@@ -104,7 +104,7 @@ public class RLComponent extends JComponent
 	}
     }
 
-    public void drawInventoryScreen(Graphics g2d) {
+    public void drawInventoryScreen(Graphics2D g2d) {
 	//Background
 	g2d.setColor(new Color(0,0,0));
 	g2d.fillRect(0,0, TestGame.WIDTH, TestGame.HEIGHT);
@@ -113,6 +113,28 @@ public class RLComponent extends JComponent
 
 	//Items
 	List<GameObject> items = game.getPlayer().getInventory().getInventory();
+
+	int iterator = 0;
+
+	for(GameObject o : items) {
+	    if (!o.equals(game.getPlayer())) {
+
+		int yAxis = iterator % 15;
+		int xAxis = iterator / 15;
+		o.draw(g2d, xAxis*5 + 4, yAxis*2 + 2);
+
+		if(game.getPlayer().getInventory().getInventoryNavigator() == iterator) {
+		    g2d.setColor(Color.YELLOW);
+		} else {
+		    g2d.setColor(Color.WHITE);
+		}
+
+		g2d.drawString(o.getName(), TestGame.SQUARESIZE*3, (iterator*2 + 4)*TestGame.SQUARESIZE - 5);
+
+		iterator++;
+	    }
+	}
+
     }
 
     private void assignKeys() {
