@@ -27,6 +27,10 @@ public class Inventory
 	inventory.add(item);
     }
 
+    public int getInventorySize() {
+        return inventory.size();
+    }
+
     public void removeFromInventory(Item item) {
 	if (inventory.contains(item)) {
 	    inventory.remove(item);

@@ -7,7 +7,7 @@ public class TestGame
     public static final int SQUARESIZE = 20;
     public static final int SCOPEWIDTH = 30;
     public static final int SCOPEHEIGHT = 24;
-
+    public static final int INVENTORYCAPACITY = 110;
 
     public TestGame() {}
     public static void main(String[] args) {

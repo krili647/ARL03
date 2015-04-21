@@ -50,15 +50,16 @@ public class Player extends Entity
         }
     }
     public void pickUpSelectedItem() {
+        //if there are other objects in the same square as the player and the number of items in player inventory < 110, pick it up
         if(game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects().size() > 1) {
-            GameObject item = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
-                    .get(inventory.getInventoryNavigator());
-            inventory.addToInventory(item);
-            game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
-                    .remove(inventory.getInventoryNavigator());
-            inventory.setInventoryNavigator(0);
-
-            System.out.println(inventory.getInventory());
+            if (inventory.getInventorySize() < TestGame.INVENTORYCAPACITY) {
+                GameObject item = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
+                        .get(inventory.getInventoryNavigator());
+                inventory.addToInventory(item);
+                game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
+                        .remove(inventory.getInventoryNavigator());
+                inventory.setInventoryNavigator(0);
+            }
         }
     }
 }
