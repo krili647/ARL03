@@ -119,13 +119,13 @@ public class RLComponent extends JComponent
 	for(GameObject o : items) {
 	    if (!o.equals(game.getPlayer())) {
 
-		int yAxis = iterator % 15;
-		int xAxis = iterator / 15;
+		int yAxis = iterator % 14;
+		int xAxis = iterator / 14;
 		int xDrawAt = xAxis*5 + 4;
 		int yDrawAt = yAxis*2 + 2;
 		o.draw(g2d, xDrawAt, yDrawAt);
 
-		if(game.getPlayer().getInventory().getInventoryNavigator() == iterator) {
+		if(game.getPlayer().getInventoryScreenNavigator().getNavigator() == iterator) {
 		    g2d.setColor(Color.YELLOW);
 		} else {
 		    g2d.setColor(Color.WHITE);
@@ -148,6 +148,8 @@ public class RLComponent extends JComponent
 		    game.getPlayer().moveTo(0, -1);
 		} else if(game.getGameState() == GameState.PICKINGUP) {
 		    game.getPlayer().decrementInventoryNavigator();
+		} else if (game.getGameState() == GameState.IN_INVENTORY) {
+		    game.getPlayer().navigateInvScrUp();
 		}
 		game.gameUpdated();
 	    }
@@ -164,6 +166,8 @@ public class RLComponent extends JComponent
 		    game.getPlayer().moveTo(0, 1);
 		} else if(game.getGameState() == GameState.PICKINGUP) {
 		    game.getPlayer().incrementInventoryNavigator();
+		} else if (game.getGameState() == GameState.IN_INVENTORY) {
+		    game.getPlayer().navigateInvScrDown();
 		}
 		game.gameUpdated();
 	    }
@@ -310,12 +314,13 @@ public class RLComponent extends JComponent
 	{
 	    @Override public void actionPerformed(ActionEvent e) {
 		if(game.getGameState() == GameState.PLAYING) {
+		    game.getPlayer().getInventoryScreenNavigator().setNavigator(0);
 		    game.setGameState(GameState.IN_INVENTORY);
-		    game.gameUpdated();
 		}else if(game.getGameState() == GameState.IN_INVENTORY) {
 		    game.setGameState(GameState.PLAYING);
-		    game.gameUpdated();
+
 		}
+		game.gameUpdated();
 	    }
 	};
 	getActionMap().put("openInventory", pressedI);

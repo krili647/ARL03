@@ -6,11 +6,13 @@ import java.util.List;
 public class Player extends Entity
 {
     private Inventory inventory;
+    private InventoryScreenNavigator inventoryScreenNavigator;
 
 
     public Player(final int x, final int y, final Game game) {
 	super(x, y, game);
         this.inventory = new Inventory();
+        this.inventoryScreenNavigator = new InventoryScreenNavigator();
     }
 
     public Player(final int x, final int y, final Game game, final Inventory inventory) {
@@ -62,4 +64,26 @@ public class Player extends Entity
             }
         }
     }
+
+    public void navigateInvScrUp() {
+        int items = inventory.getInventorySize();
+        if (inventoryScreenNavigator.getNavigator() == 0) {
+            inventoryScreenNavigator.setNavigator(items - 1);
+        } else {
+            inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() - 1);
+        }
+    }
+
+    public InventoryScreenNavigator getInventoryScreenNavigator() {
+        return inventoryScreenNavigator;
+    }
+
+    public void navigateInvScrDown() {
+        int items = inventory.getInventorySize();
+        if (inventoryScreenNavigator.getNavigator() == items - 1) {
+            inventoryScreenNavigator.setNavigator(0);
+        } else {
+            inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() + 1);
+        }
+}
 }
