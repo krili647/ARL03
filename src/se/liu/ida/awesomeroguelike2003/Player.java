@@ -88,6 +88,7 @@ public class Player extends Entity
     }
 
     public void useSelectedItem() {
+        //use selected items use method
         if (inventory.getInventorySize() > 0) {
             inventory.getInventory().get(inventoryScreenNavigator.getNavigator()).use();
         }
