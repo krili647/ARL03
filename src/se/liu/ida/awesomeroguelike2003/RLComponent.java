@@ -41,9 +41,13 @@ public class RLComponent extends JComponent
 			Tile tile = game.getMap().getTileAt(startDrawingAtX + x, startDrawingAtY + y);
 			tile.draw(g2d, x, y);
 			if (!tile.isSolid()) {
-			    for (GameObject o : tile.getGameObjects()) {
+                for (Item i : tile.getItems()) {
+                    i.draw(g2d, x, y);
+                }
+                for (GameObject o : tile.getEntities()) {
 				o.draw(g2d, x, y);
 			    }
+
 			}
 		    }
 		}
@@ -66,12 +70,11 @@ public class RLComponent extends JComponent
 	g2d.fillRect(10, 10, 200, TestGame.HEIGHT);
 
 	//draw items at player square
-	List<GameObject> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects();
+	List<Item> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems();
 
 	int iterator = 0;
 
-	for(GameObject o : items) {
-	    if (!o.equals(game.getPlayer())) {
+	for(Item o : items) {
 		o.draw(g2d, 1, iterator*2 + 1);
 
 		if(game.getPlayer().getInventory().getInventoryNavigator() == iterator) {
@@ -83,16 +86,16 @@ public class RLComponent extends JComponent
 		g2d.drawString(o.getName(), TestGame.SQUARESIZE*3, (iterator*2 + 2)*TestGame.SQUARESIZE - 5);
 
 		iterator++;
-	    }
+
 	}
 
     }
 
     public void drawSideBarInventory(Graphics2D g2d) {
 	g2d.setColor(Color.GRAY);
-	g2d.fillRect(TestGame.SCOPEWIDTH*TestGame.SQUARESIZE, (TestGame.SCOPEHEIGHT - 5)*TestGame.SQUARESIZE,
-		     TestGame.WIDTH - TestGame.SCOPEWIDTH*TestGame.SQUARESIZE, TestGame.HEIGHT - (TestGame.SCOPEHEIGHT - 5)*TestGame.SQUARESIZE);
-	List<GameObject> items = game.getPlayer().getInventory().getInventory();
+	g2d.fillRect(TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE,
+            TestGame.WIDTH - TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, TestGame.HEIGHT - (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE);
+	List<Item> items = game.getPlayer().getInventory().getInventory();
 
 	if (!items.isEmpty()) {
 	    for (int x = 0; x < items.size(); x++) {
@@ -106,13 +109,13 @@ public class RLComponent extends JComponent
 
     public void drawInventoryScreen(Graphics2D g2d) {
 	//Background
-	g2d.setColor(new Color(0,0,0));
+	g2d.setColor(new Color(0, 0, 0));
 	g2d.fillRect(0,0, TestGame.WIDTH, TestGame.HEIGHT);
 	g2d.setColor(Color.YELLOW);
 	g2d.drawString("INVENTORY \n \"i\" to Exit", TestGame.SQUARESIZE, TestGame.SQUARESIZE);
 
 	//Items
-	List<GameObject> items = game.getPlayer().getInventory().getInventory();
+	List<Item> items = game.getPlayer().getInventory().getInventory();
 
 	int iterator = 0;
 
@@ -300,8 +303,11 @@ public class RLComponent extends JComponent
 	    @Override public void actionPerformed(ActionEvent e) {
 		if (game.getGameState() == GameState.PICKINGUP) {
 		    game.getPlayer().pickUpSelectedItem();
-		    game.gameUpdated();
 		}
+        if (game.getGameState() == GameState.IN_INVENTORY) {
+            game.getPlayer().useSelectedItem();
+        }
+        game.gameUpdated();
 	    }
 	};
 	getActionMap().put("pickUpSelected", pressedEnter);

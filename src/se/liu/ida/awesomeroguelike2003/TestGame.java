@@ -11,6 +11,6 @@ public class TestGame
 
     public TestGame() {}
     public static void main(String[] args) {
-	Game game = new Game();
+        Game game = new Game();
     }
 }

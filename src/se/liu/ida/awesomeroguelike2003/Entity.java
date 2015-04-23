@@ -23,10 +23,10 @@ public abstract class Entity extends GameObject
 
     public void moveTo(final int dx, final int dy) {
         if(!collision(dx, dy)) {
-            game.getMap().getTileAt(x, y).removeFromGameObjects(this);
+            game.getMap().getTileAt(x, y).removeFromEntities(this);
             x += dx;
             y += dy;
-            game.getMap().getTileAt(x, y).addToGameObjects(this);
+            game.getMap().getTileAt(x, y).addToEntities(this);
         }
     }
 

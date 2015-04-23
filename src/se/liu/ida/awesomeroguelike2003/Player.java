@@ -36,29 +36,29 @@ public class Player extends Entity
     }
 
     public void incrementInventoryNavigator() {
-        List<GameObject> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects();
-        if (inventory.getInventoryNavigator() == items.size() - 2) {
+        List<Item> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems();
+        if (inventory.getInventoryNavigator() == items.size() - 1) {
             inventory.setInventoryNavigator(0);
         } else {
             inventory.setInventoryNavigator(inventory.getInventoryNavigator() + 1);
         }
     }
     public void decrementInventoryNavigator() {
-        List<GameObject> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects();
+        List<Item> items = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems();
         if (inventory.getInventoryNavigator() == 0) {
-            inventory.setInventoryNavigator(items.size() - 2);
+            inventory.setInventoryNavigator(items.size() - 1);
         } else {
             inventory.setInventoryNavigator(inventory.getInventoryNavigator() - 1);
         }
     }
     public void pickUpSelectedItem() {
         //if there are other objects in the same square as the player and the number of items in player inventory < 110, pick it up
-        if(game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects().size() > 1) {
+        if(game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems().size() >= 1) {
             if (inventory.getInventorySize() < TestGame.INVENTORYCAPACITY) {
-                GameObject item = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
+                Item item = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems()
                         .get(inventory.getInventoryNavigator());
                 inventory.addToInventory(item);
-                game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getGameObjects()
+                game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems()
                         .remove(inventory.getInventoryNavigator());
                 inventory.setInventoryNavigator(0);
             }
@@ -85,5 +85,12 @@ public class Player extends Entity
         } else {
             inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() + 1);
         }
+    }
+
+    public void useSelectedItem() {
+        if (inventory.getInventorySize() > 0) {
+            inventory.getInventory().get(inventoryScreenNavigator.getNavigator()).use();
+        }
+    }
 }
-}
+

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Inventory
 {
-    private List<GameObject> inventory = new ArrayList<GameObject>();
+    private List<Item> inventory = new ArrayList<Item>();
 
     private int inventoryNavigator = 0;
 
@@ -19,11 +19,11 @@ public class Inventory
         this.inventoryNavigator = inventoryNavigator;
     }
 
-    public Inventory(List<GameObject> items) {
+    public Inventory(List<Item> items) {
 	this.inventory = items;
     }
 
-    public void addToInventory(GameObject item) {
+    public void addToInventory(Item item) {
 	inventory.add(item);
     }
 
@@ -37,7 +37,7 @@ public class Inventory
 	}
     }
 
-    public List<GameObject> getInventory() {
+    public List<Item> getInventory() {
 	return inventory;
     }
 }

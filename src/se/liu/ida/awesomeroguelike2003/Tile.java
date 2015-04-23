@@ -12,19 +12,37 @@ public abstract class Tile implements Drawable
 {
     private boolean solid;
 
-    public List<GameObject> gameObjects = new ArrayList<GameObject>();
+    private List<Entity> entities = new ArrayList<Entity>();
 
-    public List<GameObject> getGameObjects() {
-            return gameObjects;
+    private List<Item> items = new ArrayList<Item>();
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void addToItems(Item o) {
+        items.add(o);
+    }
+
+    public List<Entity> getEntities() {
+            return entities;
         }
 
-    public void addToGameObjects(GameObject o) {
-            gameObjects.add(o);
+    public void addToEntities(Entity o) {
+            entities.add(o);
         }
 
-    public void removeFromGameObjects(GameObject o) {
-        if (gameObjects.contains(o)) {
-            gameObjects.remove(o);
+    public void removeFromEntities(Entity o) {
+        if (entities.contains(o)) {
+            entities.remove(o);
+        } else {
+            System.out.println("Nu blidde det fel!"); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+        }
+    }
+
+    public void removeFromItems(Item o) {
+        if (items.contains(o)) {
+            items.remove(o);
         } else {
             System.out.println("Nu blidde det fel!"); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
         }
