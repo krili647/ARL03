@@ -4,15 +4,12 @@
 
 package se.liu.ida.awesomeroguelike2003;
 
-import se.liu.ida.awesomeroguelike2003.Items.*;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game
 {
-    private boolean running = true;
+    private boolean running;
     private Map map;
     private Player player;
     private GameState gameState;
@@ -43,7 +40,6 @@ public class Game
 
     public void gameUpdated() {
         	paintComponent.repaint();
-        	System.out.println(player.getX());
         }
 
     public GameState getGameState() {
@@ -55,9 +51,9 @@ public class Game
     }
 
     public Game() {
+        this.running = true;
         this.gameState = GameState.PLAYING;
-        map = new Map(40, 40);
-        addLevel(map);
+        this.map = new Map("Map1");
         this.player = new Player(2,2, this);
         map.getTileAt(5, 5).addToItems(new ItemGoldCoin());
         map.getTileAt(5, 5).addToItems(new ItemGoldCoin());

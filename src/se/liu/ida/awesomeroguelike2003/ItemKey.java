@@ -1,17 +1,13 @@
-package se.liu.ida.awesomeroguelike2003.Items;
-
-import se.liu.ida.awesomeroguelike2003.Item;
-import se.liu.ida.awesomeroguelike2003.TestGame;
+package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
 
 public class ItemKey extends Item
 {
-    @Override public String getName() {
-        return name;
+    public ItemKey() {
+        this.name = "Key";
+        this.description = "It's an old rusty key.";
     }
-
-    private String name = "key";
 
     @Override public void use() {
 	System.out.println("NYCKEL YO");

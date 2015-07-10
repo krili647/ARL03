@@ -18,6 +18,7 @@ public class Player extends Entity
     public Player(final int x, final int y, final Game game, final Inventory inventory) {
         super(x, y, game);
         this.inventory = inventory;
+        this.inventoryScreenNavigator = new InventoryScreenNavigator();
         }
 
     public Inventory getInventory() {
