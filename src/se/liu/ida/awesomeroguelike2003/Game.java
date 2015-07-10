@@ -13,6 +13,24 @@ public class Game
     private Map map;
     private Player player;
     private GameState gameState;
+    private int levelNumber;
+    private RLFrame RLFrame;
+
+    public RLFrame getRLFrame() {
+        return RLFrame;
+    }
+
+    public void setRLFrame(RLFrame RLFrame) {
+        this.RLFrame = RLFrame;
+    }
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+
+    public void setLevelNumber(int levelNumber) {
+        this.levelNumber = levelNumber;
+    }
 
     public RLComponent getPaintComponent() {
         return paintComponent;
@@ -34,6 +52,14 @@ public class Game
         return player;
     }
 
+    public List<Map> getLevels() {
+        return levels;
+    }
+
+    public void setLevels(List<Map> levels) {
+        this.levels = levels;
+    }
+
     public void setPlayer(final Player player) {
         this.player = player;
     }
@@ -53,15 +79,15 @@ public class Game
     public Game() {
         this.running = true;
         this.gameState = GameState.PLAYING;
-        this.map = new Map("Map1");
-        this.player = new Player(2,2, this);
-        map.getTileAt(5, 5).addToItems(new ItemGoldCoin());
-        map.getTileAt(5, 5).addToItems(new ItemGoldCoin());
-        map.getTileAt(5, 5).addToItems(new ItemGoldCoin());
-        map.getTileAt(5, 5).addToItems(new ItemKey());
-        map.getTileAt(2, 2).addToEntities(player);
+
+        loadLevels();
+        this.map = levels.get(0);
+        this.levelNumber = 0;
+        this.player = new Player(levels.get(0).getStaircaseUpX(),levels.get(0).getStaircaseUpY(), this);
+
         this.paintComponent = new RLComponent(this);
-        RLFrame frame = new RLFrame(this);
+        this.RLFrame = new RLFrame(this);
+
 
 
 
@@ -69,5 +95,10 @@ public class Game
 
     public void addLevel(Map map) {
         this.levels.add(map);
+    }
+
+    private void loadLevels() {
+        this.levels.add(new Map("Map1"));
+        this.levels.add(new Map("Map2"));
     }
 }

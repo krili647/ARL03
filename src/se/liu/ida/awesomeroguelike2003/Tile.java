@@ -12,6 +12,16 @@ public abstract class Tile implements Drawable
 {
     private boolean solid;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private List<Entity> entities = new ArrayList<Entity>();
 
     private List<Item> items = new ArrayList<Item>();
@@ -36,7 +46,7 @@ public abstract class Tile implements Drawable
         if (entities.contains(o)) {
             entities.remove(o);
         } else {
-            System.out.println("Nu blidde det fel!"); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            System.out.println("Nu blidde det fel!" + o); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
         }
     }
 
@@ -44,7 +54,7 @@ public abstract class Tile implements Drawable
         if (items.contains(o)) {
             items.remove(o);
         } else {
-            System.out.println("Nu blidde det fel!"); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            System.out.println("Nu blidde det fel!" + o); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
         }
     }
 

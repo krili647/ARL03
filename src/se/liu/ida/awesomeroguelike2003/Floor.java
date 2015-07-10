@@ -13,8 +13,15 @@ public class Floor extends Tile
 {
     private boolean solid = false;
 
+    private String name = "floor";
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override public void draw(Graphics2D g, final int x, final int y) {
 	g.setColor(new Color(200, 200, 200));

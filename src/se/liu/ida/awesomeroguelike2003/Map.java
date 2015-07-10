@@ -16,8 +16,18 @@ import java.util.Random;
 public class Map
 {
     private Tile[][] map;
-    private int playerStartX;
-    private int playerStartY;
+    private int staircaseUpX;
+    private int staircaseUpY;
+    private int staircaseDownX;
+    private int staircaseDownY;
+
+    public int getStaircaseDownX() {
+        return staircaseDownX;
+    }
+
+    public int getStaircaseDownY() {
+        return staircaseDownY;
+    }
 
     public int getMapWidth(){
 	return map.length;
@@ -26,20 +36,20 @@ public class Map
 	return map[0].length;
     }
 
-    public int getPlayerStartX() {
-        return playerStartX;
+    public int getStaircaseUpX() {
+        return staircaseUpX;
     }
 
-    public void setPlayerStartX(int playerStartX) {
-        this.playerStartX = playerStartX;
+    public void setStaircaseUpX(int staircaseUpX) {
+        this.staircaseUpX = staircaseUpX;
     }
 
-    public int getPlayerStartY() {
-        return playerStartY;
+    public int getStaircaseUpY() {
+        return staircaseUpY;
     }
 
-    public void setPlayerStartY(int playerStartY) {
-        this.playerStartY = playerStartY;
+    public void setStaircaseUpY(int staircaseUpY) {
+        this.staircaseUpY = staircaseUpY;
     }
 
     public Tile getTileAt(final int x, final int y) {
@@ -64,20 +74,24 @@ public class Map
             e.printStackTrace();
         }
         this.map = new Tile[numbers.get(0)][numbers.get(1)];
+        this.staircaseUpX = numbers.get(2);
+        this.staircaseUpY = numbers.get(3);
+        this.staircaseDownX = numbers.get(4);
+        this.staircaseDownY = numbers.get(5);
 
 
-        for(int x = 0; x < numbers.size() - 2; x++) {
+        for(int x = 0; x < numbers.size() - 6; x++) {
             int deltaX = (x)% numbers.get(0);
             int deltaY = (x)/ numbers.get(1);
-            int tileNumber = numbers.get(x + 2);
-
-
-            System.out.println(x + ":" + numbers.size() + ":" + deltaX + " " + deltaY + " " + tileNumber);
+            int tileNumber = numbers.get(x + 6);
 
             switch(tileNumber) {
                 case 0: setTileAt(deltaX, deltaY, new Empty()); break;
                 case 1: setTileAt(deltaX, deltaY, new Wall()); break;
                 case 2: setTileAt(deltaX, deltaY, new Floor()); break;
+                case 3: setTileAt(deltaX, deltaY, new StaircaseUp()); break;
+                case 4: setTileAt(deltaX, deltaY, new StaircaseDown()); break;
+
             }
 
         }

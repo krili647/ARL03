@@ -12,6 +12,16 @@ public class Wall extends Tile
         return solid;
     }
 
+    private String name = "wall";
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private boolean solid = true;
 
     @Override public void draw(Graphics2D g, final int x, final int y) {

@@ -312,8 +312,54 @@ public class RLComponent extends JComponent
         if (game.getGameState() == GameState.IN_INVENTORY) {
             game.getPlayer().useSelectedItem();
         }
+        if (game.getGameState() == GameState.PLAYING) {
+            if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getName() == "up" ) {
+                //gå upp
+
+                if (game.getLevelNumber() == 0) {
+                    //exit game
+                    game.getRLFrame().dispose();
+                    System.exit(0);
+                } else {
+
+                    //Minska nivånumret
+                    game.setLevelNumber(game.getLevelNumber() - 1);
+
+                    //plocka bort spelaren från föregående bana
+                    game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).removeFromEntities(game.getPlayer());
+
+                    //se till att spelet ställer in sig för nya banan
+                    Map nextLevel = game.getLevels().get(game.getLevelNumber());
+                    game.setMap(nextLevel);
+
+                    //flytta spelaren
+                    game.getPlayer().setX(nextLevel.getStaircaseDownX());
+                    game.getPlayer().setY(nextLevel.getStaircaseDownY());
+                    game.getMap().getTileAt(nextLevel.getStaircaseDownX(),nextLevel.getStaircaseDownY()).addToEntities(game.getPlayer());
+
+                }
+            } else if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getName() == "down" ) {
+                //gå ner
+
+                //öka nivånumret
+                game.setLevelNumber(game.getLevelNumber() + 1);
+                //plocka bort spelaren från föregående bana
+                game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).removeFromEntities(game.getPlayer());
+                //se till att spelet ställer in sig för nya banan
+                Map nextLevel = game.getLevels().get(game.getLevelNumber());
+                game.setMap(nextLevel);
+                //flytta spelaren
+                game.getPlayer().setX(nextLevel.getStaircaseUpX());
+                game.getPlayer().setY(nextLevel.getStaircaseUpY());
+                game.getMap().getTileAt(nextLevel.getStaircaseUpX(),nextLevel.getStaircaseUpY()).addToEntities(game.getPlayer());
+
+
+            }
+        }
         game.gameUpdated();
-	    }
+        }
+
+
 	};
 	getActionMap().put("pickUpSelected", pressedEnter);
 

@@ -21,6 +21,14 @@ public abstract class Entity extends GameObject
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public void moveTo(final int dx, final int dy) {
         if(!collision(dx, dy)) {
             game.getMap().getTileAt(x, y).removeFromEntities(this);

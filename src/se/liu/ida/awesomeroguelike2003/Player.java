@@ -10,7 +10,8 @@ public class Player extends Entity
 
 
     public Player(final int x, final int y, final Game game) {
-	super(x, y, game);
+	    super(x, y, game);
+        game.getMap().getTileAt(x, y).addToEntities(this);
         this.inventory = new Inventory();
         this.inventoryScreenNavigator = new InventoryScreenNavigator();
     }
