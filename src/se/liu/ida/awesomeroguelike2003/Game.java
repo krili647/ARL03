@@ -86,6 +86,7 @@ public class Game
         this.player = new Player(levels.get(0).getStaircaseUpX(),levels.get(0).getStaircaseUpY(), this);
 
         map.getTileAt(7,7).addToItems(new ItemKey(this));
+        map.getTileAt(9,7).addToItems(new ItemOrbOfZot(this));
 
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);

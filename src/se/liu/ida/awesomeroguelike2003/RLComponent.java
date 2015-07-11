@@ -317,7 +317,12 @@ public class RLComponent extends JComponent
                 //gå upp
 
                 if (game.getLevelNumber() == 0) {
-                    //exit game
+                    //if player has collected the orb of zot the player wins
+                    for (Item i: game.getPlayer().getInventory().getInventory()) {
+                        if (i instanceof ItemOrbOfZot) {
+                            System.out.println("    GAME OVER \nYOU HAVE WON ETERNAL GLORY!");
+                        }
+                    }
                     game.getRLFrame().dispose();
                     System.exit(0);
                 } else {
