@@ -58,9 +58,11 @@ public abstract class Tile implements Drawable
         }
     }
 
-    boolean isSolid() {
-	return this.solid;
+    public void setSolid(boolean solid) {
+        this.solid = solid;
     }
+
+    public boolean isSolid() {return this.solid;}
 
     public void draw(Graphics2D g, final int x, final int y) {
 	g.setColor(new Color(0,0,0));

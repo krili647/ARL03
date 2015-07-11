@@ -91,6 +91,7 @@ public class Map
                 case 2: setTileAt(deltaX, deltaY, new Floor()); break;
                 case 3: setTileAt(deltaX, deltaY, new StaircaseUp()); break;
                 case 4: setTileAt(deltaX, deltaY, new StaircaseDown()); break;
+                case 5: setTileAt(deltaX, deltaY, new Door()); break;
 
             }
 

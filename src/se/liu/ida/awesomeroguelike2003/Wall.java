@@ -8,6 +8,9 @@ import java.awt.*;
 
 public class Wall extends Tile
 {
+
+    private boolean solid = true;
+
     @Override public boolean isSolid() {
         return solid;
     }
@@ -21,8 +24,6 @@ public class Wall extends Tile
     public void setName(String name) {
         this.name = name;
     }
-
-    private boolean solid = true;
 
     @Override public void draw(Graphics2D g, final int x, final int y) {
 	g.setColor(new Color(70,200,70));

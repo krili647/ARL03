@@ -4,9 +4,11 @@ import java.awt.*;
 
 public class ItemGoldCoin extends Item
 {
-    public ItemGoldCoin() {
+
+    public ItemGoldCoin(final Game game) {
+        super(game);
         this.name = "Gold Coin";
-        this.description = "It's an old gold coin.";
+        this.description = "It's an old coin";
     }
 
     @Override public void use() {
