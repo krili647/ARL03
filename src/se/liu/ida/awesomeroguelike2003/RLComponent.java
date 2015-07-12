@@ -91,7 +91,7 @@ public class RLComponent extends JComponent
 
     }
 
-    public void drawSideBarInventory(Graphics2D g2d) {
+    void drawSideBarInventory(Graphics2D g2d) {
 	g2d.setColor(Color.GRAY);
 	g2d.fillRect(TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE,
             TestGame.WIDTH - TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, TestGame.HEIGHT - (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE);
@@ -107,7 +107,7 @@ public class RLComponent extends JComponent
 	}
     }
 
-    public void drawInventoryScreen(Graphics2D g2d) {
+    void drawInventoryScreen(Graphics2D g2d) {
 	//Background
 	g2d.setColor(Color.BLACK);
 	g2d.fillRect(0,0, TestGame.WIDTH, TestGame.HEIGHT);

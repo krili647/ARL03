@@ -1,14 +1,14 @@
 package se.liu.ida.awesomeroguelike2003;
 
-public abstract class Entity extends GameObject
+abstract class Entity extends GameObject
 {
     private int healthPoints;
     private int attackPoints;
     private int defencePoints;
     private int x, y;
-    protected Game game;
+    final Game game;
 
-    public Game getGame() {
+    Game getGame() {
         return game;
     }
 
@@ -38,11 +38,11 @@ public abstract class Entity extends GameObject
         }
     }
 
-    public boolean collision(final int dx, final int dy){
+    boolean collision(final int dx, final int dy){
         return game.getMap().getTileAt(x + dx, y + dy).isSolid();
     }
 
-    public Entity(final int x, final int y, final Game game) {
+    Entity(final int x, final int y, final Game game) {
         this.x = x;
         this.y = y;
         this.game = game;

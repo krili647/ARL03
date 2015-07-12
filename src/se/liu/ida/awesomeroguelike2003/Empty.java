@@ -8,10 +8,8 @@ import java.awt.*;
 public class Empty extends Tile {
 
     @Override public boolean isSolid() {
-        return solid;
+        return true;
     }
-
-    private boolean solid = true;
 
     private String name = "empty";
 

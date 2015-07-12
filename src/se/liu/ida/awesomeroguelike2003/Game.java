@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Game
 {
-    private boolean running;
     private Map map;
     private Player player;
     private GameState gameState;
@@ -36,7 +35,7 @@ public class Game
         return paintComponent;
     }
 
-    private RLComponent paintComponent;
+    private final RLComponent paintComponent;
 
     public Map getMap() {
         return map;
@@ -77,7 +76,7 @@ public class Game
     }
 
     public Game() {
-        this.running = true;
+        boolean running = true;
         this.gameState = GameState.PLAYING;
 
         loadLevels();

@@ -19,20 +19,5 @@ public class ItemOrbOfZot extends Item {
         g.fillOval(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
 
-    @Override public void use() {
-        int playerX = game.getPlayer().getX();
-        int playerY = game.getPlayer().getY();
-
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-                Tile tile = game.getMap().getTileAt(playerX + x, playerY + y);
-                if(tile.getName() == "door" && tile.isSolid()) {
-                    tile.setSolid(false);
-                    game.getPlayer().getInventory().removeFromInventory(this);
-                    game.setGameState(GameState.PLAYING);
-                }
-            }
-        }
-
-    }
+    @Override public void use() {}
 }

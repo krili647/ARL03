@@ -7,7 +7,7 @@ package se.liu.ida.awesomeroguelike2003;
 import javax.swing.*;
 import java.awt.*;
 
-public interface Drawable
+interface Drawable
 {
     void draw(Graphics2D g, final int x, final int y);
 }

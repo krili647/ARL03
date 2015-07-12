@@ -1,11 +1,11 @@
 package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
-import java.awt.print.Book;
 
 /**
  * Created by leopold on 2015-07-11.
  */
+
 public class Door extends Tile {
 
     private boolean solid = true;
@@ -19,8 +19,9 @@ public class Door extends Tile {
     @Override public boolean isSolid() {
         return solid;
     }
-    @Override public void setSolid(boolean solid) {
-        this.solid = solid;
+
+    public void setSolid(Boolean bool) {
+        this.solid = bool;
     }
 
     public void setName(String name) {

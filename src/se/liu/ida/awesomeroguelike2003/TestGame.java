@@ -1,6 +1,6 @@
 package se.liu.ida.awesomeroguelike2003;
 
-public class TestGame
+class TestGame
 {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;

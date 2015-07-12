@@ -9,10 +9,8 @@ import java.awt.*;
 public class Wall extends Tile
 {
 
-    private boolean solid = true;
-
     @Override public boolean isSolid() {
-        return solid;
+        return true;
     }
 
     private String name = "wall";

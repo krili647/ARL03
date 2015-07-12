@@ -58,8 +58,8 @@ public abstract class Tile implements Drawable
         }
     }
 
-    public void setSolid(boolean solid) {
-        this.solid = solid;
+    public void setSolid(Boolean bool) {
+        this.solid = bool;
     }
 
     public boolean isSolid() {return this.solid;}

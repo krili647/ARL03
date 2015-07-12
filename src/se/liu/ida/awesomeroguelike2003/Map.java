@@ -15,11 +15,11 @@ import java.util.Random;
 
 public class Map
 {
-    private Tile[][] map;
+    private final Tile[][] map;
     private int staircaseUpX;
     private int staircaseUpY;
-    private int staircaseDownX;
-    private int staircaseDownY;
+    private final int staircaseDownX;
+    private final int staircaseDownY;
 
     public int getStaircaseDownX() {
         return staircaseDownX;
@@ -54,11 +54,6 @@ public class Map
 
     public Tile getTileAt(final int x, final int y) {
 	return map[x][y];
-    }
-
-    public Map(final int width, final int height) {
-	this.map = new Tile[width][height];
-	createMap(getMapWidth(), getMapHeight());
     }
 
     public Map(final String name) {
@@ -97,7 +92,7 @@ public class Map
 
         }
     }
-    public void setTileAt(final int x, final int y, Tile tile)
+    void setTileAt(final int x, final int y, Tile tile)
     {
 	map[x][y] = tile;
     }
@@ -107,20 +102,6 @@ public class Map
 	for(int x = 0; x < getMapWidth(); x++) {
 	    for(int y = 0; y < getMapHeight(); y++) {
 		if (rnd.nextBoolean()) {
-		    setTileAt(x, y, new Wall());
-		} else {
-		    setTileAt(x, y, new Floor());
-		}
-	    }
-	}
-    }
-
-    public void createMap(int x, int y){
-	for (x = 0; x < getMapWidth(); x++){
-	    for (y = 0; y < getMapHeight(); y++){
-		if (y == 0 || y == getMapHeight() -1){
-		    setTileAt(x, y, new Wall());
-		} else if(x == 0 || x == getMapWidth() - 1) {
 		    setTileAt(x, y, new Wall());
 		} else {
 		    setTileAt(x, y, new Floor());
