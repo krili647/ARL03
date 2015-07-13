@@ -3,7 +3,7 @@ package se.liu.ida.awesomeroguelike2003;
 import java.awt.*;
 import java.util.List;
 
-public class Player extends Entity
+class Player extends Entity
 {
     private Inventory inventory;
     private InventoryScreenNavigator inventoryScreenNavigator;
@@ -92,5 +92,8 @@ public class Player extends Entity
             inventory.getInventory().get(inventoryScreenNavigator.getNavigator()).use();
         }
     }
+
+    @Override
+    public void EntityAI() {}
 }
 

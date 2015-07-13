@@ -22,7 +22,7 @@ public abstract class Tile implements Drawable
         this.name = name;
     }
 
-    private List<Entity> entities = new ArrayList<Entity>();
+    private Entity entityHere;
 
     private List<Item> items = new ArrayList<Item>();
 
@@ -34,17 +34,17 @@ public abstract class Tile implements Drawable
         items.add(o);
     }
 
-    public List<Entity> getEntities() {
-            return entities;
+    public Entity getEntityHere() {
+            return entityHere;
         }
 
     public void addToEntities(Entity o) {
-            entities.add(o);
+            this.entityHere = o;
         }
 
     public void removeFromEntities(Entity o) {
-        if (entities.contains(o)) {
-            entities.remove(o);
+        if (entityHere == o) {
+            entityHere = null;
         } else {
             System.out.println("Nu blidde det fel!" + o); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
         }

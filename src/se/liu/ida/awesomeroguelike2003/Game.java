@@ -65,6 +65,8 @@ public class Game
 
     public void gameUpdated() {
         	paintComponent.repaint();
+            //update all AI
+            updateAI();
         }
 
     public GameState getGameState() {
@@ -92,9 +94,6 @@ public class Game
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);
 
-
-
-
     }
 
     public void addLevel(Map map) {
@@ -104,5 +103,15 @@ public class Game
     private void loadLevels() {
         this.levels.add(new Map("Map1"));
         this.levels.add(new Map("Map2"));
+    }
+
+    private void updateAI() {
+        for (int x = 0; x < map.getMapWidth(); x++) {
+            for (int y = 0; y < map.getMapHeight(); y++) {
+                if (map.getTileAt(x, y).getEntityHere() != null) {
+                    map.getTileAt(x, y).getEntityHere().EntityAI();
+                }
+            }
+        }
     }
 }

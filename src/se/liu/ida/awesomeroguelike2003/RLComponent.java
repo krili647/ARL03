@@ -44,9 +44,10 @@ public class RLComponent extends JComponent
                 for (Item i : tile.getItems()) {
                     i.draw(g2d, x, y);
                 }
-                for (GameObject o : tile.getEntities()) {
-				o.draw(g2d, x, y);
-			    }
+                if (tile.getEntityHere() != null) {
+                    tile.getEntityHere().draw(g2d, x, y);
+                }
+
 
 			}
 		    }

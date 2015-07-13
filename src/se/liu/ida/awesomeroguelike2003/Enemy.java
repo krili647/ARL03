@@ -19,4 +19,9 @@ public class Enemy extends Entity {
         g.setColor(new Color(0,0,0));
         g.fillOval(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
+
+    @Override
+    public void EntityAI() {
+        //A*
+    }
 }

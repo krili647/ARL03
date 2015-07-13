@@ -2,7 +2,7 @@ package se.liu.ida.awesomeroguelike2003;
 
 import java.util.Random;
 
-abstract class Entity extends GameObject
+abstract class Entity extends GameObject implements GameAI
 {
     protected int healthPoints;
     protected int attackPoints;
@@ -32,9 +32,9 @@ abstract class Entity extends GameObject
 
     public void moveTo(final int dx, final int dy) {
         if(!collision(dx, dy)) {
-            if (game.getMap().getTileAt(x + dx, y + dy).getEntities().size() > 0) {
+            if (game.getMap().getTileAt(x + dx, y + dy).getEntityHere() != null) {
                 System.out.println("HEEEJ");
-                attackOther(this, game.getMap().getTileAt(x + dx, y + dy).getEntities().get(0));
+                attackOther(this, game.getMap().getTileAt(x + dx, y + dy).getEntityHere());
             } else {
                 game.getMap().getTileAt(x, y).removeFromEntities(this);
                 x += dx;
