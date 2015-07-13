@@ -1,11 +1,13 @@
 package se.liu.ida.awesomeroguelike2003;
 
+import java.util.Random;
+
 abstract class Entity extends GameObject
 {
-    private int healthPoints;
-    private int attackPoints;
-    private int defencePoints;
-    private int x, y;
+    protected int healthPoints;
+    protected int attackPoints;
+    protected int defencePoints;
+    protected int x, y;
     final Game game;
 
     Game getGame() {
@@ -13,7 +15,6 @@ abstract class Entity extends GameObject
     }
 
     public int getX() {
-
         return x;
     }
 
@@ -33,7 +34,7 @@ abstract class Entity extends GameObject
         if(!collision(dx, dy)) {
             if (game.getMap().getTileAt(x + dx, y + dy).getEntities().size() > 0) {
                 System.out.println("HEEEJ");
-                //ATTACK-METODEN HÄR
+                attackOther(this, game.getMap().getTileAt(x + dx, y + dy).getEntities().get(0));
             } else {
                 game.getMap().getTileAt(x, y).removeFromEntities(this);
                 x += dx;
@@ -55,6 +56,13 @@ abstract class Entity extends GameObject
         this.game = game;
         game.getMap().getTileAt(x, y).addToEntities(this);
 
+    }
+
+    private void attackOther(final Entity self, final Entity other) {
+        Random random = new Random();
+        int damage = random.nextInt(self.attackPoints);
+        other.healthPoints -= damage;
+        System.out.println(damage);
     }
 
 }

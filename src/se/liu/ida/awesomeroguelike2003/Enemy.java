@@ -10,6 +10,9 @@ public class Enemy extends Entity {
 
     public Enemy(final int x, final int y, final Game game) {
         super(x, y, game);
+        this.healthPoints = 10;
+        this.attackPoints = 10;
+        this.defencePoints = 10;
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {
