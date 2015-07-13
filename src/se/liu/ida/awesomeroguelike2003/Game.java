@@ -82,8 +82,10 @@ public class Game
         loadLevels();
         this.map = levels.get(0);
         this.levelNumber = 0;
-        this.player = new Player(levels.get(0).getStaircaseUpX(),levels.get(0).getStaircaseUpY(), this);
+        this.player = new Player(map.getStaircaseUpX(), map.getStaircaseUpY(), this);
 
+        new Enemy(9,6,this);
+        //map.getTileAt(7,7).addToEntities(new Enemy(9,6,this));
         map.getTileAt(7,7).addToItems(new ItemKey(this));
         map.getTileAt(9,7).addToItems(new ItemOrbOfZot(this));
 

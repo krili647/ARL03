@@ -112,7 +112,7 @@ public class RLComponent extends JComponent
 	g2d.setColor(Color.BLACK);
 	g2d.fillRect(0,0, TestGame.WIDTH, TestGame.HEIGHT);
 	g2d.setColor(Color.YELLOW);
-	g2d.drawString("INVENTORY \n \"i\" to Exit", TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+	g2d.drawString("INVENTORY \n \"i\" to exit / [enter] to use", TestGame.SQUARESIZE, TestGame.SQUARESIZE);
 
 	//Items
 	List<Item> items = game.getPlayer().getInventory().getInventory();
@@ -130,7 +130,7 @@ public class RLComponent extends JComponent
 
 		if(game.getPlayer().getInventoryScreenNavigator().getNavigator() == iterator) {
             g2d.setColor(Color.WHITE);
-            g2d.drawString(o.getDescription(), 10*TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+            g2d.drawString(o.getDescription(), 20*TestGame.SQUARESIZE, TestGame.SQUARESIZE);
             g2d.setColor(Color.YELLOW);
 		} else {
 		    g2d.setColor(Color.WHITE);
@@ -141,9 +141,7 @@ public class RLComponent extends JComponent
 
 		iterator++;
 	    }
-    g2d.setColor(Color.WHITE);
-    g2d.drawString(game.getPlayer().getInventory().getInventory().get(game.getPlayer().getInventoryScreenNavigator().getNavigator()).getDescription(), 10*TestGame.SQUARESIZE, TestGame.SQUARESIZE);
-	}
+    }
 
     }
 
