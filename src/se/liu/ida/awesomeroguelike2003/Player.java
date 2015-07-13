@@ -94,6 +94,10 @@ class Player extends Entity
     }
 
     @Override
-    public void EntityAI() {}
+    public void EntityAI() {
+        if (healthPoints < 1) {
+            game.setGameState(GameState.PLAYERDEAD);
+        }
+    }
 }
 

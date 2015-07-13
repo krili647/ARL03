@@ -1,6 +1,7 @@
 package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by leopold on 2015-07-12.
@@ -22,6 +23,28 @@ public class Enemy extends Entity {
 
     @Override
     public void EntityAI() {
-        //A*
+        //fulhackad pathfinding
+        Random random = new Random();
+        if (random.nextInt(3) < 2) {
+
+        int playerX = game.getPlayer().getX();
+        int playerY = game.getPlayer().getY();
+
+        int dX = playerX - getX();
+        int dY = playerY - getY();
+
+        if (Math.pow(dX, 2) + Math.pow(dY, 2) < Math.pow(7, 2)) {
+
+            if (dX != 0) {
+                dX = dX / Math.abs(dX);
+            }
+            if (dY != 0) {
+                dY = dY / Math.abs(dY);
+            }
+
+            moveTo(dX, dY);
+        }
+        }
+
     }
 }

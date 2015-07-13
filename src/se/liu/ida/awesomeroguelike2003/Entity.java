@@ -2,7 +2,7 @@ package se.liu.ida.awesomeroguelike2003;
 
 import java.util.Random;
 
-abstract class Entity extends GameObject implements GameAI
+abstract class Entity extends GameObject implements EntityBehaviour
 {
     protected int healthPoints;
     protected int attackPoints;
