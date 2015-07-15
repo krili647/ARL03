@@ -25,5 +25,11 @@ public class StaircaseUp extends Tile {
         int xPoints[] = {(x)*TestGame.SQUARESIZE, (x+1)*TestGame.SQUARESIZE, (x+1)*TestGame.SQUARESIZE};
         int yPoints[] = {(y+1)*TestGame.SQUARESIZE, (y+1)*TestGame.SQUARESIZE, (y)*TestGame.SQUARESIZE};
         g.fillPolygon(xPoints, yPoints, 3);
+        for (Item i : getItems()) {
+            i.draw(g, x, y);
+        }
+        if (getEntityHere() != null) {
+            getEntityHere().draw(g, x, y);
+        }
     }
 }

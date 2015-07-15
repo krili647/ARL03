@@ -12,6 +12,16 @@ public abstract class Tile implements Drawable
 {
     private boolean solid;
 
+    private boolean seen;
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
     private String name;
 
     public String getName() {

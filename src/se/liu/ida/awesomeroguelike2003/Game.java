@@ -68,7 +68,24 @@ public class Game
         	paintComponent.repaint();
             //update all AI
             updateAI();
+            updateMap();
         }
+
+    private void updateMap() {
+        final int range = 7;
+
+        for (int x = 0; x < map.getMapWidth(); x++) {
+            for (int y = 0; y < map.getMapHeight(); y++) {
+                final int playerX = player.getX() - x;
+                final int playerY = player.getY() - y;
+                int distance = (int) Math.sqrt(Math.pow(playerX, 2) + Math.pow(playerY, 2));
+                if (distance < range) {
+
+                    map.getTileAt(x, y).setSeen(true);
+                }
+            }
+        }
+    }
 
     public GameState getGameState() {
         return gameState;
@@ -109,6 +126,8 @@ public class Game
 
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);
+
+        updateMap();
 
     }
 
