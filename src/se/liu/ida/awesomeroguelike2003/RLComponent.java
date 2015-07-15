@@ -55,6 +55,8 @@ public class RLComponent extends JComponent
 	    }
 	}
 
+    drawHealthBar(g2d);
+
 	drawSideBarInventory(g2d);
 
 	if (game.getGameState() == GameState.PICKINGUP) {
@@ -63,6 +65,23 @@ public class RLComponent extends JComponent
 	if (game.getGameState() == GameState.IN_INVENTORY) {
 	    drawInventoryScreen(g2d);
 	}
+    if (game.getGameState() == GameState.PLAYERDEAD) {
+        drawGameOverScreen(g2d);
+    }
+    }
+
+    private void drawHealthBar(Graphics2D g2d) {
+        g2d.setColor(Color.YELLOW);
+        g2d.drawString("HEALTH: " + game.getPlayer().getHealthPoints(), 31 * TestGame.SQUARESIZE, 5 * TestGame.SQUARESIZE);
+    }
+
+    private void drawGameOverScreen(Graphics2D g2d) {
+        //draw bg
+        g2d.setColor(Color.black);
+        g2d.fillRect(0, 0, TestGame.WIDTH, TestGame.HEIGHT);
+
+        g2d.setColor(Color.YELLOW);
+        g2d.drawString("GAME OVER \n You died, Press enter to exit.", TestGame.WIDTH/4, TestGame.HEIGHT/2);
     }
 
     private void drawItemScreen(Graphics2D g2d) {
@@ -310,6 +329,10 @@ public class RLComponent extends JComponent
 		}
         if (game.getGameState() == GameState.IN_INVENTORY) {
             game.getPlayer().useSelectedItem();
+        }
+        if (game.getGameState() == GameState.PLAYERDEAD) {
+            game.getRLFrame().dispose();
+            System.exit(0);
         }
         if (game.getGameState() == GameState.PLAYING) {
             if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getName() == "up" ) {

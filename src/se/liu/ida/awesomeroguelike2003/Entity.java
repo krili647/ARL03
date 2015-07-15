@@ -30,10 +30,21 @@ abstract class Entity extends GameObject implements EntityBehaviour
         this.y = y;
     }
 
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public int getDefencePoints() {
+        return defencePoints;
+    }
+
     public void moveTo(final int dx, final int dy) {
         if(!collision(dx, dy)) {
             if (game.getMap().getTileAt(x + dx, y + dy).getEntityHere() != null) {
-                System.out.println("HEEEJ");
                 attackOther(this, game.getMap().getTileAt(x + dx, y + dy).getEntityHere());
             } else {
                 game.getMap().getTileAt(x, y).removeFromEntities(this);
@@ -62,7 +73,6 @@ abstract class Entity extends GameObject implements EntityBehaviour
         Random random = new Random();
         int damage = random.nextInt(self.attackPoints);
         other.healthPoints -= damage;
-        System.out.println(damage);
     }
 
 }
