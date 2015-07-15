@@ -13,10 +13,11 @@ class Player extends Entity
 	    super(x, y, game);
         this.inventory = new Inventory();
         this.inventoryScreenNavigator = new InventoryScreenNavigator();
+        this.name = "Player";
 
         this.attackPoints = 10;
         this.defencePoints = 10;
-        this.healthPoints = 10;
+        this.healthPoints = 100;
     }
 
     public Inventory getInventory() {

@@ -14,6 +14,7 @@ public class Game
     private GameState gameState;
     private int levelNumber;
     private RLFrame RLFrame;
+    private List<String> messageRoll;
 
     public RLFrame getRLFrame() {
         return RLFrame;
@@ -77,9 +78,19 @@ public class Game
         this.gameState = gameState;
     }
 
+    public List<String> getMessageRoll() {
+        return messageRoll;
+    }
+
+    public void addToMessageRoll(String message) {
+        messageRoll.add(message);
+    }
+
     public Game() {
-        boolean running = true;
+        //boolean running = true;
         this.gameState = GameState.PLAYING;
+        this.messageRoll = new ArrayList<String>();
+
 
         loadLevels();
         this.map = levels.get(0);
@@ -89,6 +100,10 @@ public class Game
         new Enemy(30,6,this);
         map.getTileAt(7,7).addToItems(new ItemKey(this));
         map.getTileAt(9,7).addToItems(new ItemOrbOfZot(this));
+        addToMessageRoll("Welcome to The Dungeon of Zot!");
+        addToMessageRoll("If you can leave this place with The Orb of Zot");
+        addToMessageRoll("Uncountable riches and glory will be yours!");
+        addToMessageRoll("Although many have tried before you, none have succeeded...");
 
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);

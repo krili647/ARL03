@@ -59,6 +59,8 @@ public class RLComponent extends JComponent
 
 	drawSideBarInventory(g2d);
 
+    drawMessageRoll(g2d);
+
 	if (game.getGameState() == GameState.PICKINGUP) {
 	    drawItemScreen(g2d);
 	}
@@ -68,6 +70,26 @@ public class RLComponent extends JComponent
     if (game.getGameState() == GameState.PLAYERDEAD) {
         drawGameOverScreen(g2d);
     }
+    }
+
+    private void drawMessageRoll(Graphics2D g2d) {
+        g2d.setColor(Color.YELLOW);
+        List<String> roll = game.getMessageRoll();
+
+        int maxNr = 5;
+
+        if (roll.size() == 0) {}
+        else if (roll.size() < maxNr) {
+            //rita det som finns
+            for (int i = 0; i < roll.size(); i++) {
+                g2d.drawString(roll.get(i), TestGame.SQUARESIZE,(TestGame.SCOPEHEIGHT + 1 + i)*TestGame.SQUARESIZE);
+            }
+        } else {
+            //rita senaste fem
+            for (int i = 0; i < maxNr; i++) {
+                g2d.drawString(roll.get(roll.size() - maxNr + i),TestGame.SQUARESIZE,(TestGame.SCOPEHEIGHT + 1 + i)*TestGame.SQUARESIZE);
+            }
+        }
     }
 
     private void drawHealthBar(Graphics2D g2d) {

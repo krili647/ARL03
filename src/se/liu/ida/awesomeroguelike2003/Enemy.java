@@ -14,6 +14,7 @@ public class Enemy extends Entity {
         this.healthPoints = 10;
         this.attackPoints = 10;
         this.defencePoints = 10;
+        this.name = "Enemy";
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {
@@ -45,6 +46,9 @@ public class Enemy extends Entity {
             moveTo(dX, dY);
         }
         }
-
+        if (healthPoints < 1) {
+            game.getMap().getTileAt(x, y).removeFromEntities(this);
+            game.addToMessageRoll(name + " was killed!");
+        }
     }
 }
