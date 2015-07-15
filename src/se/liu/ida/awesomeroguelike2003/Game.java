@@ -99,11 +99,13 @@ public class Game
 
         new Enemy(30,6,this);
         map.getTileAt(7,7).addToItems(new ItemKey(this));
+        map.getTileAt(7,7).addToItems(new ItemKey(this));
         map.getTileAt(9,7).addToItems(new ItemOrbOfZot(this));
-        addToMessageRoll("Welcome to The Dungeon of Zot!");
-        addToMessageRoll("If you can leave this place with The Orb of Zot");
-        addToMessageRoll("Uncountable riches and glory will be yours!");
-        addToMessageRoll("Although many have tried before you, none have succeeded...");
+        addToMessageRoll("              Welcome to The Dungeon of Zot!");
+        addToMessageRoll("              If you can leave this place with The Orb of Zot");
+        addToMessageRoll("              uncountable riches and glory will be yours!");
+        addToMessageRoll("              Although many have tried before you, none have succeeded...");
+        addToMessageRoll("[enter] to use stairs | \",\" to pick up items | \"i\" for inventory | [arrow keys/numPad] to move");
 
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);

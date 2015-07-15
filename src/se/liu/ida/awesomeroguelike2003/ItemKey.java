@@ -19,10 +19,10 @@ public class ItemKey extends Item
             for (int y = -1; y <= 1; y++) {
                 Tile tile = game.getMap().getTileAt(playerX + x, playerY + y);
                 if(tile.getName() == "door" && tile.isSolid()) {
-                    System.out.println("regis");
                     tile.setSolid(false);
                     game.getPlayer().getInventory().removeFromInventory(this);
                     game.setGameState(GameState.PLAYING);
+                    game.addToMessageRoll("Door was unlocked.");
                 }
             }
         }
