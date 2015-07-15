@@ -1,7 +1,8 @@
 package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by leopold on 2015-07-12.
@@ -28,23 +29,27 @@ public class Enemy extends Entity {
         Random random = new Random();
         if (random.nextInt(3) < 2) {
 
-        int playerX = game.getPlayer().getX();
-        int playerY = game.getPlayer().getY();
+            int viewingDistance = 10;
 
-        int dX = playerX - getX();
-        int dY = playerY - getY();
+            int playerX = game.getPlayer().getX();
+            int playerY = game.getPlayer().getY();
 
-        if (Math.pow(dX, 2) + Math.pow(dY, 2) < Math.pow(7, 2)) {
+            int dX = playerX - getX();
+            int dY = playerY - getY();
 
-            if (dX != 0) {
-                dX = dX / Math.abs(dX);
+            if (Math.pow(dX, 2) + Math.pow(dY, 2) < Math.pow(7, 2)) {
+
+                if (dX != 0) {
+                    dX = dX / Math.abs(dX);
+                }
+                if (dY != 0) {
+                    dY = dY / Math.abs(dY);
+                }
+
+                moveTo(dX, dY);
             }
-            if (dY != 0) {
-                dY = dY / Math.abs(dY);
-            }
 
-            moveTo(dX, dY);
-        }
+
         }
         if (healthPoints < 1) {
             game.getMap().getTileAt(x, y).removeFromEntities(this);

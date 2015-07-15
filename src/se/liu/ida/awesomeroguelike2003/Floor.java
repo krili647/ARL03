@@ -26,13 +26,5 @@ public class Floor extends Tile
     @Override public void draw(Graphics2D g, final int x, final int y) {
 	g.setColor(new Color(200, 200, 200));
 	g.fillRect(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
-
-    for (Item i : getItems()) {
-        i.draw(g, x, y);
-    }
-    if (getEntityHere() != null) {
-        getEntityHere().draw(g, x, y);
-    }
-
     }
 }

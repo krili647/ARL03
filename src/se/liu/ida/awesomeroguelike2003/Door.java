@@ -39,12 +39,6 @@ public class Door extends Tile {
 
             g.setColor(new Color(40, 10, 0));
             g.fillRect(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE/4, TestGame.SQUARESIZE);
-            for (Item i : getItems()) {
-                i.draw(g, x, y);
-            }
-            if (getEntityHere() != null) {
-                getEntityHere().draw(g, x, y);
-            }
         }
     }
 }

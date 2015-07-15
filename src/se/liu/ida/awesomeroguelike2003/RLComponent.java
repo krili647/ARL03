@@ -41,6 +41,12 @@ public class RLComponent extends JComponent
 			Tile tile = game.getMap().getTileAt(startDrawingAtX + x, startDrawingAtY + y);
             if (tile.isSeen()) {
                 tile.draw(g2d, x, y);
+                for (Item i : tile.getItems()) {
+                    i.draw(g2d, x, y);
+                }
+                if (tile.getEntityHere() != null) {
+                    tile.getEntityHere().draw(g2d, x, y);
+                }
             }
 		    }
 		}
