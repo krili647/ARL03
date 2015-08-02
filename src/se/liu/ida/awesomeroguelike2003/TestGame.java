@@ -9,6 +9,8 @@ class TestGame
     public static final int SCOPEHEIGHT = 24;
     public static final int INVENTORYCAPACITY = 105;
 
+    //test
+
     public TestGame() {}
     public static void main(String[] args) {
         Game game = new Game();
