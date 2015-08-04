@@ -10,8 +10,10 @@ import java.util.List;
 
 public abstract class Tile implements Drawable
 {
+    //Can you walk through the tile or not?
     private boolean solid;
 
+    //Has the tile been discovered yet?
     private boolean seen;
 
     public boolean isSeen() {
@@ -32,6 +34,7 @@ public abstract class Tile implements Drawable
         this.name = name;
     }
 
+    //Is there an enemy on this tile?
     private Entity entityHere;
 
     private List<Item> items = new ArrayList<Item>();

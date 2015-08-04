@@ -85,6 +85,8 @@ public class Game
     }
 
     private void traverseMap(final int x, final int y, final int n) {
+        //If a tile is discovered, make it visible on the map
+
         for (int dX = -1; dX < 2; dX++) {
             for (int dY = -1; dY < 2; dY++) {
                 if (x + dX > 0 && x + dX < map.getMapWidth()) {
@@ -120,7 +122,6 @@ public class Game
     }
 
     public Game() {
-        //boolean running = true;
         this.gameState = GameState.PLAYING;
         this.messageRoll = new ArrayList<String>();
 
@@ -144,6 +145,7 @@ public class Game
     }
 
     private void loadLevels() {
+        //Create levels, put enemies and items on every level
         Random rnd = new Random();
 
         this.levels.add(new Map("Map1"));
@@ -177,6 +179,7 @@ public class Game
     }
 
     private void addRandomEnemy(Map map) {
+        //Add a random enemy on a random location on the map
         Random rnd = new Random();
 
         int x = rnd.nextInt(map.getMapWidth());

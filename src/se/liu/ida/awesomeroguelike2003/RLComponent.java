@@ -59,6 +59,7 @@ public class RLComponent extends JComponent
 
     drawMessageRoll(g2d);
 
+    //Different screens for different game states
 	if (game.getGameState() == GameState.PICKINGUP) {
 	    drawItemScreen(g2d);
 	}
@@ -91,6 +92,7 @@ public class RLComponent extends JComponent
     }
 
     private void drawHealthBar(Graphics2D g2d) {
+		//Health indicated by a number on the screen
         g2d.setColor(Color.YELLOW);
         g2d.drawString("HEALTH: " + game.getPlayer().getHealthPoints(), 31 * TestGame.SQUARESIZE, 5 * TestGame.SQUARESIZE);
     }
@@ -115,6 +117,7 @@ public class RLComponent extends JComponent
 	int iterator = 0;
 
 	for(Item o : items) {
+		//The items on the tile will be displayed in a list at the left side of the screen
 		o.draw(g2d, 1, iterator*2 + 1);
 
 		if(game.getPlayer().getInventory().getInventoryNavigator() == iterator) {
@@ -132,6 +135,7 @@ public class RLComponent extends JComponent
     }
 
     void drawSideBarInventory(Graphics2D g2d) {
+    //The items in the players inventory is being displayed in a box at the lower right corner of the screen
 	g2d.setColor(Color.GRAY);
 	g2d.fillRect(TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE,
             TestGame.WIDTH - TestGame.SCOPEWIDTH * TestGame.SQUARESIZE, TestGame.HEIGHT - (TestGame.SCOPEHEIGHT - 5) * TestGame.SQUARESIZE);
@@ -160,6 +164,7 @@ public class RLComponent extends JComponent
 	int iterator = 0;
 
 	for(Item o : items) {
+		//Draws the items in your inventory with a description of them
 	    if (!o.equals(game.getPlayer())) {
 
 		int yAxis = iterator % 14;
@@ -186,6 +191,9 @@ public class RLComponent extends JComponent
     }
 
     private void assignKeys() {
+
+	//Movement keys
+
 	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD8"), "goNorth");
 	final Action pressedUp = new AbstractAction()
 	{
@@ -323,6 +331,8 @@ public class RLComponent extends JComponent
 	};
 	getActionMap().put("goSouthEast", pressedThree);
 
+	//Item actions
+
 	getInputMap().put(KeyStroke.getKeyStroke("COMMA"), "pickUp");
 
 	final Action pressedComma = new AbstractAction()
@@ -356,7 +366,7 @@ public class RLComponent extends JComponent
         }
         if (game.getGameState() == GameState.PLAYING) {
             if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getName() == "up" ) {
-                //gå upp
+                //move up
 
                 if (game.getLevelNumber() == 0) {
                     //if player has collected the orb of zot the player wins
@@ -369,33 +379,36 @@ public class RLComponent extends JComponent
                     System.exit(0);
                 } else {
 
-                    //Minska nivånumret
+                    //Reduce the level number
                     game.setLevelNumber(game.getLevelNumber() - 1);
 
-                    //plocka bort spelaren från föregående bana
+                    //remove player from the previous level
                     game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).removeFromEntities(game.getPlayer());
 
-                    //se till att spelet ställer in sig för nya banan
+                    //Set the game for the new level
                     Map nextLevel = game.getLevels().get(game.getLevelNumber());
                     game.setMap(nextLevel);
 
-                    //flytta spelaren
+                    //Move the player
                     game.getPlayer().setX(nextLevel.getStaircaseDownX());
                     game.getPlayer().setY(nextLevel.getStaircaseDownY());
                     game.getMap().getTileAt(nextLevel.getStaircaseDownX(),nextLevel.getStaircaseDownY()).addToEntities(game.getPlayer());
 
                 }
             } else if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getName() == "down" ) {
-                //gå ner
+                //Move down
 
-                //öka nivånumret
+                //Increase the level number
                 game.setLevelNumber(game.getLevelNumber() + 1);
-                //plocka bort spelaren från föregående bana
+
+                //Remove the player from the previous level
                 game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).removeFromEntities(game.getPlayer());
-                //se till att spelet ställer in sig för nya banan
+
+                //Set the game for the new level
                 Map nextLevel = game.getLevels().get(game.getLevelNumber());
                 game.setMap(nextLevel);
-                //flytta spelaren
+
+                //Move the player
                 game.getPlayer().setX(nextLevel.getStaircaseUpX());
                 game.getPlayer().setY(nextLevel.getStaircaseUpY());
                 game.getMap().getTileAt(nextLevel.getStaircaseUpX(),nextLevel.getStaircaseUpY()).addToEntities(game.getPlayer());
@@ -410,7 +423,7 @@ public class RLComponent extends JComponent
 	};
 	getActionMap().put("pickUpSelected", pressedEnter);
 
-	//open inventory
+	//Open inventory
 
 	getInputMap().put(KeyStroke.getKeyStroke("I"), "openInventory");
 

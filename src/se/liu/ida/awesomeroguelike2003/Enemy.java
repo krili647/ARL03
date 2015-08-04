@@ -51,6 +51,8 @@ public class Enemy extends Entity {
 
 
         }
+
+        //The enemy is dead
         if (healthPoints < 1) {
             game.getMap().getTileAt(x, y).removeFromEntities(this);
             game.addToMessageRoll(name + " was killed!");

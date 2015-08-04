@@ -57,6 +57,9 @@ public class Map
     }
 
     public Map(final String name) {
+
+        //Maps consists of two dimensional arrays of numbers
+        //It reads the numbers and translates them to different tile types
         List<Integer> numbers = new ArrayList<Integer>();
         try {
             for (String line : Files.readAllLines(Paths.get("src/se/liu/ida/awesomeroguelike2003/maps/" + name), Charset.defaultCharset())) {
@@ -80,6 +83,7 @@ public class Map
             int deltaY = (x)/ numbers.get(1);
             int tileNumber = numbers.get(x + 6);
 
+            //Translate from number to tile type
             switch(tileNumber) {
                 case 0: setTileAt(deltaX, deltaY, new Empty()); break;
                 case 1: setTileAt(deltaX, deltaY, new Wall()); break;

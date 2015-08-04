@@ -43,6 +43,7 @@ abstract class Entity extends GameObject implements EntityBehaviour
     }
 
     public void moveTo(final int dx, final int dy) {
+        //If another entity stands in the way, attack it, otherwise move.
         if(!collision(dx, dy)) {
             if (game.getMap().getTileAt(x + dx, y + dy).getEntityHere() != null) {
                 attackOther(this, game.getMap().getTileAt(x + dx, y + dy).getEntityHere());
@@ -70,6 +71,7 @@ abstract class Entity extends GameObject implements EntityBehaviour
     }
 
     private void attackOther(final Entity self, final Entity other) {
+        //Checks stats for both the attacked and the attacker to set health points of the attacked
         Random random = new Random();
         int damage = random.nextInt(self.attackPoints);
         other.healthPoints -= damage;

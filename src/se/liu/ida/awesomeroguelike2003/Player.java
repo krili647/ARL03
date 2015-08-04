@@ -30,7 +30,7 @@ class Player extends Entity
     }
 
     public void pickUp() {
-        //öppna itemcomponent
+        //Open itemcomponent
         getGame().setGameState(GameState.PICKINGUP);
         inventory.setInventoryNavigator(0);
     }
@@ -52,7 +52,9 @@ class Player extends Entity
         }
     }
     public void pickUpSelectedItem() {
-        //if there are other objects in the same square as the player and the number of items in player inventory < 110, pick it up
+        //If there are other objects in the same square as the player
+        //and the number of items in player inventory < 110, pick it up
+
         if(game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems().size() >= 1) {
             if (inventory.getInventorySize() < TestGame.INVENTORYCAPACITY) {
                 Item item = game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems()
