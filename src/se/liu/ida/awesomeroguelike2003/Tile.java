@@ -10,8 +10,13 @@ import java.util.List;
 
 public abstract class Tile implements Drawable
 {
-    //Can you walk through the tile or not?
-    private boolean solid;
+    private boolean isSolid; //Can you walk through the tile?
+    private String name;
+
+    public Tile(final boolean isSolid, final String name){
+        this.isSolid = isSolid;
+        this.name = name;
+    }
 
     //Has the tile been discovered yet?
     private boolean seen;
@@ -24,15 +29,7 @@ public abstract class Tile implements Drawable
         this.seen = seen;
     }
 
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getName() { return name; }
 
     //Is there an enemy on this tile?
     private Entity entityHere;
@@ -72,10 +69,10 @@ public abstract class Tile implements Drawable
     }
 
     public void setSolid(Boolean bool) {
-        this.solid = bool;
+        this.isSolid = bool;
     }
 
-    public boolean isSolid() {return this.solid;}
+    public boolean isSolid() {return this.isSolid;}
 
     public void draw(Graphics2D g, final int x, final int y) {
 	g.setColor(new Color(0,0,0));

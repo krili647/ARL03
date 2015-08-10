@@ -9,18 +9,8 @@ import java.awt.*;
 public class Wall extends Tile
 {
 
-    @Override public boolean isSolid() {
-        return true;
-    }
-
-    private String name = "wall";
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Wall(){
+        super(true, "Wall");
     }
 
     @Override public void draw(Graphics2D g, final int x, final int y) {

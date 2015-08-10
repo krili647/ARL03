@@ -7,11 +7,9 @@ import java.awt.*;
  */
 public class Empty extends Tile {
 
-    @Override public boolean isSolid() {
-        return true;
+    public Empty(){
+        super(true, "Empty");
     }
-
-    private String name = "empty";
 
     @Override public void draw(Graphics2D g, final int x, final int y) {
         g.setColor(Color.BLACK);

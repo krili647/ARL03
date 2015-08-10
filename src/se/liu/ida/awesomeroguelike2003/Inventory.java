@@ -5,23 +5,21 @@ import java.util.List;
 
 public class Inventory
 {
+    public Inventory() {}
+
+    public Inventory(List<Item> items) {
+	this.inventory = items;
+    }
+
     private List<Item> inventory = new ArrayList<Item>();
 
     private int inventoryNavigator = 0;
-
-    public Inventory() {}
 
     public int getInventoryNavigator() {
         return inventoryNavigator;
     }
 
-    public void setInventoryNavigator(final int inventoryNavigator) {
-        this.inventoryNavigator = inventoryNavigator;
-    }
-
-    public Inventory(List<Item> items) {
-	this.inventory = items;
-    }
+    public void setInventoryNavigator(final int inventoryNavigator) { this.inventoryNavigator = inventoryNavigator; }
 
     public void addToInventory(Item item) {
 	inventory.add(item);

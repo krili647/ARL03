@@ -21,10 +21,6 @@ public class Game
         return RLFrame;
     }
 
-    public void setRLFrame(RLFrame RLFrame) {
-        this.RLFrame = RLFrame;
-    }
-
     public int getLevelNumber() {
         return levelNumber;
     }
@@ -47,23 +43,13 @@ public class Game
         this.map = map;
     }
 
-    private List<Map> levels = new ArrayList<Map>();
+    private List<Map> levels = new ArrayList<>();
 
     public Player getPlayer() {
         return player;
     }
 
-    public List<Map> getLevels() {
-        return levels;
-    }
-
-    public void setLevels(List<Map> levels) {
-        this.levels = levels;
-    }
-
-    public void setPlayer(final Player player) {
-        this.player = player;
-    }
+    public List<Map> getLevels() { return levels; }
 
     public void gameUpdated() {
         	paintComponent.repaint();
@@ -123,7 +109,7 @@ public class Game
 
     public Game() {
         this.gameState = GameState.PLAYING;
-        this.messageRoll = new ArrayList<String>();
+        this.messageRoll = new ArrayList<>();
 
 
         loadLevels();

@@ -11,11 +11,7 @@ import java.util.List;
 public class Enemy extends Entity {
 
     public Enemy(final int x, final int y, final Game game) {
-        super(x, y, game);
-        this.healthPoints = 10;
-        this.attackPoints = 10;
-        this.defencePoints = 10;
-        this.name = "Enemy";
+        super(x, y, 10, 10, 10, "Enemy", game);
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {
@@ -40,10 +36,10 @@ public class Enemy extends Entity {
             if (Math.pow(dX, 2) + Math.pow(dY, 2) < Math.pow(7, 2)) {
 
                 if (dX != 0) {
-                    dX = dX / Math.abs(dX);
+                    dX /= Math.abs(dX);
                 }
                 if (dY != 0) {
-                    dY = dY / Math.abs(dY);
+                    dY /= Math.abs(dY);
                 }
 
                 moveTo(dX, dY);

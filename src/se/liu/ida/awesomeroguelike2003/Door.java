@@ -8,24 +8,8 @@ import java.awt.*;
 
 public class Door extends Tile {
 
-    private boolean solid = true;
-
-    private String name = "door";
-
-    public String getName() {
-        return name;
-    }
-
-    @Override public boolean isSolid() {
-        return solid;
-    }
-
-    public void setSolid(Boolean bool) {
-        this.solid = bool;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Door(){
+        super(true, "Door");
     }
 
     @Override

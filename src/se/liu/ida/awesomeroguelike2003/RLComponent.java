@@ -77,7 +77,7 @@ public class RLComponent extends JComponent
 
         int maxNr = 5;
 
-        if (roll.size() == 0) {}
+        if (roll.isEmpty()) {}
         else if (roll.size() < maxNr) {
             //rita det som finns
             for (int i = 0; i < roll.size(); i++) {

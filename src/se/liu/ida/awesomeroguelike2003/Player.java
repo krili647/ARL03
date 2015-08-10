@@ -9,15 +9,10 @@ class Player extends Entity
     private InventoryScreenNavigator inventoryScreenNavigator;
 
 
-    public Player(final int x, final int y, final Game game) {
-	    super(x, y, game);
+    Player(final int x, final int y, final Game game) {
+	    super(x, y, 10, 10, 100, "Player", game);
         this.inventory = new Inventory();
         this.inventoryScreenNavigator = new InventoryScreenNavigator();
-        this.name = "Player";
-
-        this.attackPoints = 10;
-        this.defencePoints = 10;
-        this.healthPoints = 100;
     }
 
     public Inventory getInventory() {

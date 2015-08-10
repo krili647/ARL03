@@ -6,9 +6,7 @@ public class ItemGoldCoin extends Item
 {
 
     public ItemGoldCoin(final Game game) {
-        super(game);
-        this.name = "Gold Coin";
-        this.description = "It's an old coin";
+        super("Gold Coin", "It's an old coin", game);
     }
 
     @Override public void use() {

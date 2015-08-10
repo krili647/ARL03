@@ -7,7 +7,9 @@ abstract class Item extends GameObject
 
     protected Game game;
 
-    public Item(final Game game) {
+    public Item(final String name, final String description, final Game game) {
+        super(name);
+        this.description = description;
         this.game = game;
     }
 

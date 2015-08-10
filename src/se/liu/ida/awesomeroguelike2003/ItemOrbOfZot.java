@@ -9,9 +9,7 @@ import java.awt.*;
 public class ItemOrbOfZot extends Item {
 
     public ItemOrbOfZot(final Game game) {
-        super(game);
-        this.description = "The Magical Orb of Zot!";
-        this.name = "Orb of Zot";
+        super("Orb of Zot", "The Magical Orb of Zot!", game);
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {

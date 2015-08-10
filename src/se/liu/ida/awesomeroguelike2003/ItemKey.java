@@ -6,9 +6,7 @@ public class ItemKey extends Item
 {
 
     public ItemKey(final Game game) {
-        super(game);
-        this.description = "It's an old rusty key.";
-        this.name = "Key";
+        super("Key", "It's an old rusty key", game);
     }
 
     @Override public void use() {

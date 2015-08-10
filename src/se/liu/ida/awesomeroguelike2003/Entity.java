@@ -10,6 +10,20 @@ abstract class Entity extends GameObject implements EntityBehaviour
     protected int x, y;
     final Game game;
 
+    Entity(final int x, final int y,
+           final int healthPoints, final int attackPoints, final int defencePoints,
+           final String name, final Game game) {
+        super(name);
+        this.x = x;
+        this.y = y;
+        this.healthPoints = healthPoints;
+        this.attackPoints = attackPoints;
+        this.defencePoints = defencePoints;
+        this.game = game;
+        game.getMap().getTileAt(x, y).addToEntities(this);
+
+    }
+
     Game getGame() {
         return game;
     }
@@ -34,14 +48,6 @@ abstract class Entity extends GameObject implements EntityBehaviour
         return healthPoints;
     }
 
-    public int getAttackPoints() {
-        return attackPoints;
-    }
-
-    public int getDefencePoints() {
-        return defencePoints;
-    }
-
     public void moveTo(final int dx, final int dy) {
         //If another entity stands in the way, attack it, otherwise move.
         if(!collision(dx, dy)) {
@@ -59,14 +65,6 @@ abstract class Entity extends GameObject implements EntityBehaviour
     boolean collision(final int dx, final int dy){
 
         return game.getMap().getTileAt(x + dx, y + dy).isSolid();
-
-    }
-
-    Entity(final int x, final int y, final Game game) {
-        this.x = x;
-        this.y = y;
-        this.game = game;
-        game.getMap().getTileAt(x, y).addToEntities(this);
 
     }
 

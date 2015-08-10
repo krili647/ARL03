@@ -11,16 +11,8 @@ import java.util.List;
 
 public class Floor extends Tile
 {
-    private boolean solid = false;
-
-    private String name = "floor";
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Floor(){
+        super(false, "Floor");
     }
 
     @Override public void draw(Graphics2D g, final int x, final int y) {

@@ -40,17 +40,7 @@ public class Map
         return staircaseUpX;
     }
 
-    public void setStaircaseUpX(int staircaseUpX) {
-        this.staircaseUpX = staircaseUpX;
-    }
-
-    public int getStaircaseUpY() {
-        return staircaseUpY;
-    }
-
-    public void setStaircaseUpY(int staircaseUpY) {
-        this.staircaseUpY = staircaseUpY;
-    }
+    public int getStaircaseUpY() { return staircaseUpY; }
 
     public Tile getTileAt(final int x, final int y) {
 	return map[x][y];
@@ -101,16 +91,4 @@ public class Map
 	map[x][y] = tile;
     }
 
-    public void createRandomMap() {
-	Random rnd = new Random();
-	for(int x = 0; x < getMapWidth(); x++) {
-	    for(int y = 0; y < getMapHeight(); y++) {
-		if (rnd.nextBoolean()) {
-		    setTileAt(x, y, new Wall());
-		} else {
-		    setTileAt(x, y, new Floor());
-		}
-	    }
-	}
-    }
 }
