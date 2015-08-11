@@ -143,6 +143,8 @@ public class Game
 
         new Enemy(30,6,this);
         map.getTileAt(9,23).addToItems(new ItemKey(this));
+        map.getTileAt(10,23).addToItems(new ItemKey(this));
+        map.getTileAt(11,23).addToItems(new ItemKey(this));
         map.getTileAt(7,7).addToItems(new ItemKey(this));
 
 

@@ -10,7 +10,7 @@ class Player extends Entity
 
 
     Player(final int x, final int y, final Game game) {
-	    super(x, y, 10, 10, 100, "Player", game);
+	    super(x, y, 100, 20, 10, "Player", game);
         this.inventory = new Inventory();
         this.inventoryScreenNavigator = new InventoryScreenNavigator();
     }

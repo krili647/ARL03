@@ -13,11 +13,15 @@ public class ItemKey extends Item
         int playerX = game.getPlayer().getX();
         int playerY = game.getPlayer().getY();
 
+        //If a door is in an adjacent tile, open it
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                Tile tile = game.getMap().getTileAt(playerX + x, playerY + y);
-                if(tile.getName() == "door" && tile.isSolid()) {
-                    tile.setSolid(false);
+                Tile adjacentTile = game.getMap().getTileAt(playerX + x, playerY + y);
+
+                if(adjacentTile.getClass().isInstance(new Door())) {
+                    adjacentTile.setSolid(false);
+
+                    //When used, remove from inventory
                     game.getPlayer().getInventory().removeFromInventory(this);
                     game.setGameState(GameState.PLAYING);
                     game.addToMessageRoll("Door was unlocked.");
