@@ -31,7 +31,7 @@ public abstract class Tile implements Drawable
 
     public String getName() { return name; }
 
-    //Is there an enemy on this tile?
+    //An entity on the tile
     private Entity entityHere;
 
     private List<Item> items = new ArrayList<Item>();
@@ -56,7 +56,7 @@ public abstract class Tile implements Drawable
         if (entityHere == o) {
             entityHere = null;
         } else {
-            System.out.println("Nu blidde det fel!" + o); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            System.out.println("Nu blidde det fel! (E)" + o); //ERROR
         }
     }
 
@@ -64,7 +64,7 @@ public abstract class Tile implements Drawable
         if (items.contains(o)) {
             items.remove(o);
         } else {
-            System.out.println("Nu blidde det fel!" + o); //ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            System.out.println("Nu blidde det fel!" + o); //ERROR
         }
     }
 

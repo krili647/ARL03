@@ -9,6 +9,7 @@ public class ItemKey extends Item
         super("Key", "It's an old rusty key", game);
     }
 
+
     @Override public void use() {
         int playerX = game.getPlayer().getX();
         int playerY = game.getPlayer().getY();
@@ -29,6 +30,10 @@ public class ItemKey extends Item
             }
         }
 
+    }
+
+    public String useMessage(){
+        return "Door was unlocked";
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {

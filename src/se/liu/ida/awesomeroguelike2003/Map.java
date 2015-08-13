@@ -46,13 +46,13 @@ public class Map
 	return map[x][y];
     }
 
-    public Map(final String name) {
+    public Map(final int levelNumber) {
 
         //Maps consists of two dimensional arrays of numbers
         //It reads the numbers and translates them to different tile types
         List<Integer> numbers = new ArrayList<Integer>();
         try {
-            for (String line : Files.readAllLines(Paths.get("src/se/liu/ida/awesomeroguelike2003/maps/" + name), Charset.defaultCharset())) {
+            for (String line : Files.readAllLines(Paths.get("src/se/liu/ida/awesomeroguelike2003/maps/Map" + levelNumber), Charset.defaultCharset())) {
                 for (String part : line.split("\\s+")) {
                     Integer i = Integer.valueOf(part);
                     numbers.add(i);

@@ -20,7 +20,7 @@ abstract class Entity extends GameObject implements EntityBehaviour
         this.attackPoints = attackPoints;
         this.defencePoints = defencePoints;
         this.game = game;
-        game.getMap().getTileAt(x, y).addToEntities(this);
+        //game.getMap().getTileAt(x, y).addToEntities(this);
 
     }
 
@@ -36,13 +36,9 @@ abstract class Entity extends GameObject implements EntityBehaviour
         return y;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
+    public void setX(int x) { this.x = x; }
 
-    public void setY(int y) {
-        this.y = y;
-    }
+    public void setY(int y) { this.y = y; }
 
     public int getHealthPoints() {
         return healthPoints;
