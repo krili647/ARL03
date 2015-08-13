@@ -56,11 +56,11 @@ public class Game
     public Level getLevel(final int levelNumber) { return levels.get(levelNumber); }
 
     public void gameUpdated() {
-        	paintComponent.repaint();
-            //update all AI
-            updateAI();
-            updateMap();
-        }
+        paintComponent.repaint();
+        //update all AI
+        updateAI();
+        updateMap();
+    }
 
     private void updateMap() {
         final int visibility = 3;
@@ -69,8 +69,6 @@ public class Game
         final int playerY = player.getY();
 
         traverseMap(playerX, playerY, visibility);
-
-
 
     }
 
@@ -113,7 +111,7 @@ public class Game
         this.levels = new ArrayList<>();
 
         loadLevels();
-        setLevelNumber(0);
+        setLevelNumber(2);
         setMap(getLevel(levelNumber).getMap());
 
         this.player = new Player(map.getStaircaseUpX(), map.getStaircaseUpY(), this);
@@ -132,6 +130,8 @@ public class Game
         updateMap();
 
     }
+
+
 
     public void changeLevel(final int newLevelNumber){
 
@@ -172,8 +172,6 @@ public class Game
         }
 
     }
-
-
 
     private void updateAI() {
         for (int x = 0; x < map.getMapWidth(); x++) {

@@ -10,8 +10,11 @@ import java.util.List;
 
 public class Enemy extends Entity {
 
+    private Random random;
+
     public Enemy(final int x, final int y, final Game game) {
         super(x, y, 10, 10, 10, "Enemy", game);
+        this.random = new Random();
     }
 
     @Override public void draw(final Graphics2D g, final int x, final int y) {
@@ -22,10 +25,7 @@ public class Enemy extends Entity {
     @Override
     public void EntityAI() {
         //fulhackad pathfinding
-        Random random = new Random();
         if (random.nextInt(3) < 2) {
-
-            int viewingDistance = 10;
 
             int playerX = game.getPlayer().getX();
             int playerY = game.getPlayer().getY();

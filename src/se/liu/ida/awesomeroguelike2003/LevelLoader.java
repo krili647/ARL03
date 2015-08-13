@@ -14,11 +14,11 @@ public class LevelLoader
 
     }
 
-    protected void addItem(final int x, final int y){
+    protected void addItem(){
 
     }
 
-    protected void addEnemy(final int x, final int y){
+    protected void addEnemy(){
 
     }
 

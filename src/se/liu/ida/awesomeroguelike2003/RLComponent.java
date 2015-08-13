@@ -71,33 +71,21 @@ public class RLComponent extends JComponent
     }
 
     private void drawMessageRoll(Graphics2D g2d) {
-
 	game.getMessageRoll().draw(g2d);
-	/*
-	g2d.setColor(Color.YELLOW);
-	List<String> roll = game.getMessageRoll();
-
-	int maxNr = 5;
-
-	if (roll.isEmpty()) {} else if (roll.size() < maxNr) {
-	    //rita det som finns
-	    for (int i = 0; i < roll.size(); i++) {
-		g2d.drawString(roll.get(i), TestGame.SQUARESIZE, (TestGame.SCOPEHEIGHT + 1 + i) * TestGame.SQUARESIZE);
-	    }
-	} else {
-	    //rita senaste fem
-	    for (int i = 0; i < maxNr; i++) {
-		g2d.drawString(roll.get(roll.size() - maxNr + i), TestGame.SQUARESIZE,
-			       (TestGame.SCOPEHEIGHT + 1 + i) * TestGame.SQUARESIZE);
-	    }
-	}
-	*/
     }
 
     private void drawHealthBar(Graphics2D g2d) {
+
 	//Health indicated by a number on the screen
 	g2d.setColor(Color.YELLOW);
 	g2d.drawString("HEALTH: " + game.getPlayer().getHealthPoints(), 31 * TestGame.SQUARESIZE, 5 * TestGame.SQUARESIZE);
+
+	//Health bar
+	int maxHealth = 100;
+	int currentHealth = (game.getPlayer().getHealthPoints() * 100 / maxHealth);
+
+	g2d.drawRect(31 * TestGame.SQUARESIZE, 3 * TestGame.SQUARESIZE, maxHealth, TestGame.SQUARESIZE);
+	g2d.fillRect(31*TestGame.SQUARESIZE, 3*TestGame.SQUARESIZE, currentHealth, TestGame.SQUARESIZE);
     }
 
     private void drawGameOverScreen(Graphics2D g2d) {
