@@ -15,7 +15,7 @@ public class Game
     private GameState gameState;
     private int levelNumber;
     private RLFrame RLFrame;
-    private List<String> messageRoll;
+    private MessageRoll messageRoll;
     private List<Level> levels;
     private final int numOfLevels = 3; //This is a fixed number
 
@@ -103,17 +103,13 @@ public class Game
         this.gameState = gameState;
     }
 
-    public List<String> getMessageRoll() {
+    public MessageRoll getMessageRoll(){
         return messageRoll;
-    }
-
-    public void addToMessageRoll(String message) {
-        messageRoll.add(message);
     }
 
     public Game() {
         this.gameState = GameState.PLAYING;
-        this.messageRoll = new ArrayList<>();
+        this.messageRoll = new MessageRoll();
         this.levels = new ArrayList<>();
 
         loadLevels();
@@ -122,11 +118,13 @@ public class Game
 
         this.player = new Player(map.getStaircaseUpX(), map.getStaircaseUpY(), this);
 
-        addToMessageRoll("              Welcome to The Dungeon of Zot!");
-        addToMessageRoll("              If you can leave this place with The Orb of Zot");
-        addToMessageRoll("              uncountable riches and glory will be yours!");
-        addToMessageRoll("              Although many have tried before you, none have succeeded...");
-        addToMessageRoll("[enter] to use stairs | \",\" to pick up items | \"i\" for inventory | [arrow keys/numPad] to move");
+        messageRoll.addMessage("Welcome to The Dungeon of Zot!");
+        messageRoll.addMessage("If you can leave this place with The Orb of Zot " +
+                               "uncountable riches and glory will be yours! " +
+                               "Although many have tried before you, none have secceeded...");
+        messageRoll.addMessage("");
+        messageRoll.addMessage("[enter] to use stairs | \",\" to pick up items | \"i\" for inventory | [arrow keys/numPad] to move");
+
 
         this.paintComponent = new RLComponent(this);
         this.RLFrame = new RLFrame(this);

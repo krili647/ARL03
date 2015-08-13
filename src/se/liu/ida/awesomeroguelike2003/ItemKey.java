@@ -25,7 +25,7 @@ public class ItemKey extends Item
                     //When used, remove from inventory
                     game.getPlayer().getInventory().removeFromInventory(this);
                     game.setGameState(GameState.PLAYING);
-                    game.addToMessageRoll("Door was unlocked.");
+                    game.getMessageRoll().addMessage("Door was unlocked.");
                 }
             }
         }

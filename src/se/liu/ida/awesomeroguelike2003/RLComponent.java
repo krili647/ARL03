@@ -71,6 +71,9 @@ public class RLComponent extends JComponent
     }
 
     private void drawMessageRoll(Graphics2D g2d) {
+
+	game.getMessageRoll().draw(g2d);
+	/*
 	g2d.setColor(Color.YELLOW);
 	List<String> roll = game.getMessageRoll();
 
@@ -88,6 +91,7 @@ public class RLComponent extends JComponent
 			       (TestGame.SCOPEHEIGHT + 1 + i) * TestGame.SQUARESIZE);
 	    }
 	}
+	*/
     }
 
     private void drawHealthBar(Graphics2D g2d) {

@@ -69,7 +69,7 @@ abstract class Entity extends GameObject implements EntityBehaviour
         Random random = new Random();
         int damage = random.nextInt(self.attackPoints);
         other.healthPoints -= damage;
-        game.addToMessageRoll(other.getName() + " took " + damage  + " damage!");
+        game.getMessageRoll().addMessage(other.getName() + " took " + damage  + " damage!");
     }
 
 }
