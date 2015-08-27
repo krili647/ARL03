@@ -18,18 +18,12 @@ public class Game
     private List<Level> levels;
     private static final int NUMOFLEVELS = 3; //This is a fixed number
 
-    public int getNumOfLevels() { return NUMOFLEVELS; }
-
     public RLFrame getFrame() {
         return frame;
     }
 
     public int getLevelNumber() {
         return levelNumber;
-    }
-
-    public void setLevelNumber(int levelNumber) {
-        this.levelNumber = levelNumber;
     }
 
     public RLComponent getPaintComponent() {
@@ -40,10 +34,6 @@ public class Game
 
     public Map getMap() {
         return map;
-    }
-
-    public void setMap(final Map map) {
-        this.map = map;
     }
 
     Player getPlayer() {

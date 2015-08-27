@@ -8,15 +8,16 @@ import java.awt.*;
 public class StaircaseDown extends Tile{
 
     public StaircaseDown(){
-        super(false, "StaircaseDown");
+        super(false, "StaircaseDown", 200, 200, 200);
+
     }
 
-    @Override public void draw(Graphics2D g, final int x, final int y) {
-        g.setColor(new Color(200, 200, 200));
-        g.fillRect(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
-        g.setColor(new Color(0, 0, 0));
+    @Override public void draw(Graphics2D g2d, final int x, final int y) {
+        g2d.setColor(new Color(r,g,b));
+        g2d.fillRect(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+        g2d.setColor(new Color(0, 0, 0));
         int[] xPoints = { (x) * TestGame.SQUARESIZE, (x) * TestGame.SQUARESIZE, (x + 1) * TestGame.SQUARESIZE };
         int[] yPoints = { (y) * TestGame.SQUARESIZE, (y + 1) * TestGame.SQUARESIZE, (y + 1) * TestGame.SQUARESIZE };
-        g.fillPolygon(xPoints, yPoints, 3);
+        g2d.fillPolygon(xPoints, yPoints, 3);
     }
 }

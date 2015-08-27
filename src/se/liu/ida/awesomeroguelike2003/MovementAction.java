@@ -3,13 +3,13 @@ package se.liu.ida.awesomeroguelike2003;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class MovementKeys extends AbstractAction
+public class MovementAction extends AbstractAction
 {
-    Game game;
-    Direction direction;
-    int dx, dy;
+    private Game game;
+    private Direction direction;
+    private int dx, dy;
 
-    MovementKeys(Direction direction, Game game){
+    MovementAction(Direction direction, Game game){
 	this.game = game;
 	this.direction = direction;
 
@@ -70,13 +70,13 @@ public class MovementKeys extends AbstractAction
 		break;
 
 	    case IN_INVENTORY:
-		switch (direction){
-		    case UP:
-			game.getPlayer().navigateInvScrUp();
-			break;
-		    case DOWN:
-			game.getPlayer().navigateInvScrDown();
-		}
+		game.getPlayer().navigateInvScr(direction);
+		break;
+
+	    case PLAYERDEAD:
+		//When dead, close down everything
+		game.getFrame().dispose();
+		System.exit(0);
 		break;
 	}
 

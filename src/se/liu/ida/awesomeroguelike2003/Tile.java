@@ -5,14 +5,13 @@
 package se.liu.ida.awesomeroguelike2003;
 
 import java.util.*;
-import java.util.List;
 
 public abstract class Tile extends GameObject
 {
     private boolean isSolid; //Can you walk through the tile?
 
-    protected Tile(final boolean isSolid, final String name){
-        super(name);
+    protected Tile(final boolean isSolid, final String name, final int r, final int g, final int b){
+        super(name, r, g, b);
         this.isSolid = isSolid;
     }
 

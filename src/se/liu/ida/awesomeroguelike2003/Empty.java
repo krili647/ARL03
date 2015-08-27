@@ -8,11 +8,11 @@ import java.awt.*;
 public class Empty extends Tile {
 
     public Empty(){
-        super(true, "Empty");
+        super(true, "Empty", 0, 0, 0);
     }
 
-    @Override public void draw(Graphics2D g, final int x, final int y) {
-        g.setColor(Color.BLACK);
-        g.fillRect(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+    @Override public void draw(Graphics2D g2d, final int x, final int y) {
+        g2d.setColor(new Color(r,g,b));
+        g2d.fillRect(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
 }

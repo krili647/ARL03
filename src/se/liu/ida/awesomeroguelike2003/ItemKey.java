@@ -6,7 +6,9 @@ public class ItemKey extends Item
 {
 
     public ItemKey(final Game game) {
-        super("Key", "It's an old rusty key", game);
+
+        super("Key", "It's an old rusty key", 255, 255, 0, game);
+
     }
 
 
@@ -15,15 +17,12 @@ public class ItemKey extends Item
         int playerY = game.getPlayer().getY();
 
         //If a door is in an adjacent tile, open it
-        int adjacentX;
-        int adjacentY;
-        Tile adjacentTile;
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                adjacentX = playerX + x;
-                adjacentY = playerY + y;
-                adjacentTile = game.getMap().getTileAt(adjacentX, adjacentY);
+                int adjacentX = playerX + x;
+                int adjacentY = playerY + y;
+                Tile adjacentTile = game.getMap().getTileAt(adjacentX, adjacentY);
 
                 if(adjacentTile.getClass().isInstance(new Door())) {
                     game.getLevel(game.getLevelNumber()).getMap().setTileAt(adjacentX, adjacentY, new Floor());
@@ -31,19 +30,15 @@ public class ItemKey extends Item
                     //When used, remove from inventory
                     game.getPlayer().getInventory().removeFromInventory(this);
                     game.setGameState(GameState.PLAYING);
-                    game.getMessageRoll().addMessage(useMessage());
+                    game.getMessageRoll().addMessage("Door was unlocked");
                 }
             }
         }
 
     }
 
-    public String useMessage(){
-        return "Door was unlocked";
-    }
-
-    @Override public void draw(final Graphics2D g, final int x, final int y) {
-	g.setColor(Color.YELLOW);
-	g.fillRect(x* TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+    @Override public void draw(final Graphics2D g2d, final int x, final int y) {
+	g2d.setColor(new Color(r, g, b));
+	g2d.fillRect(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
 }

@@ -6,7 +6,6 @@ package se.liu.ida.awesomeroguelike2003;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 
 public class RLFrame extends JFrame
 {

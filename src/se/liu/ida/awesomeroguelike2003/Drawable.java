@@ -4,7 +4,6 @@
 
 package se.liu.ida.awesomeroguelike2003;
 
-import javax.swing.*;
 import java.awt.*;
 
 interface Drawable

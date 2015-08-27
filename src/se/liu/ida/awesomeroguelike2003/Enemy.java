@@ -2,7 +2,6 @@ package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by leopold on 2015-07-12.
@@ -13,13 +12,13 @@ public class Enemy extends Entity {
     private Random random;
 
     public Enemy(final int x, final int y, final Game game) {
-        super(x, y, 10, 10, "Enemy", game);
+        super(x, y, 10, 10, "Enemy", 0, 0, 0, game);
         this.random = new Random();
     }
 
-    @Override public void draw(final Graphics2D g, final int x, final int y) {
-        g.setColor(new Color(0,0,0));
-        g.fillOval(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+    @Override public void draw(final Graphics2D g2d, final int x, final int y) {
+        g2d.setColor(new Color(r,g,b));
+        g2d.fillOval(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
 
     @Override

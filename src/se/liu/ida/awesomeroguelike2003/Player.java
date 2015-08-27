@@ -10,7 +10,7 @@ class Player extends Entity
 
 
     Player(final int x, final int y, final Game game) {
-	    super(x, y, 100, 10, "Player", game);
+	    super(x, y, 100, 10, "Player", 200, 0, 0, game);
         this.inventory = new Inventory();
         this.inventoryScreenNavigator = new InventoryScreenNavigator();
     }
@@ -19,9 +19,9 @@ class Player extends Entity
         return inventory;
     }
 
-    @Override public void draw(final Graphics2D g, final int x, final int y) {
-	g.setColor(new Color(200,0,0));
-	g.fillOval(x*TestGame.SQUARESIZE, y*TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
+    @Override public void draw(final Graphics2D g2d, final int x, final int y) {
+	g2d.setColor(new Color(r, g, b));
+	g2d.fillOval(x * TestGame.SQUARESIZE, y * TestGame.SQUARESIZE, TestGame.SQUARESIZE, TestGame.SQUARESIZE);
     }
 
     public void pickUp() {
@@ -62,26 +62,49 @@ class Player extends Entity
         }
     }
 
-    public void navigateInvScrUp() {
+    public void navigateInvScr(Direction direction){
         int items = inventory.getInventorySize();
-        if (inventoryScreenNavigator.getNavigator() == 0) {
-            inventoryScreenNavigator.setNavigator(items - 1);
-        } else {
-            inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() - 1);
+        int dy;
+
+        switch (direction){
+            case UP:
+                dy = -1;
+
+                //When the navigator comes to one end of the list, start at the other end
+                if (inventoryScreenNavigator.getNavigator() == 0){
+                    inventoryScreenNavigator.setNavigator(items - 1);
+                }
+                break;
+
+            case RIGHT:
+                dy = 0;
+                break;
+
+            case DOWN:
+                dy = 1;
+
+                //When the navigator comes to one end of the list, start at the other end
+                if (inventoryScreenNavigator.getNavigator() == items - 1){
+                    inventoryScreenNavigator.setNavigator(0);
+                }
+                break;
+
+            case LEFT:
+                dy = 0;
+                break;
+
+            default:
+                dy = 0;
         }
+
+        //Scroll through the list
+        inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() + dy);
+
+
     }
 
     public InventoryScreenNavigator getInventoryScreenNavigator() {
         return inventoryScreenNavigator;
-    }
-
-    public void navigateInvScrDown() {
-        int items = inventory.getInventorySize();
-        if (inventoryScreenNavigator.getNavigator() == items - 1) {
-            inventoryScreenNavigator.setNavigator(0);
-        } else {
-            inventoryScreenNavigator.setNavigator(inventoryScreenNavigator.getNavigator() + 1);
-        }
     }
 
     public void useSelectedItem() {

@@ -5,22 +5,23 @@
 package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.security.Key;
 import java.util.List;
 import javax.swing.*;
 
 public class RLComponent extends JComponent
 {
     private Game game;
-    public Action moveUp, moveRight, moveDown, moveLeft;
+    private Action moveUp, moveRight, moveDown, moveLeft, pickUp, enterAction, openInventory;
 
     public RLComponent(final Game game) {
 	this.game = game;
-	moveUp = new MovementKeys(Direction.UP, game);
-	moveRight = new MovementKeys(Direction.RIGHT, game);
-	moveDown = new MovementKeys(Direction.DOWN, game);
-	moveLeft = new MovementKeys(Direction.LEFT, game);
+	moveUp = new MovementAction(Direction.UP, game);
+	moveRight = new MovementAction(Direction.RIGHT, game);
+	moveDown = new MovementAction(Direction.DOWN, game);
+	moveLeft = new MovementAction(Direction.LEFT, game);
+	pickUp = new PickUpAction(game);
+	enterAction = new EnterAction(game);
+	openInventory = new OpenInventoryAction(game);
 	assignKeys();
     }
 
@@ -36,7 +37,6 @@ public class RLComponent extends JComponent
 	//Draw only the tiles that can be found in the scope
 	final int startDrawingAtX = game.getPlayer().getX() - TestGame.SCOPEWIDTH / 2;
 	final int startDrawingAtY = game.getPlayer().getY() - TestGame.SCOPEHEIGHT / 2;
-	Tile visibleTile;
 
 	for (int x = 0; x < TestGame.SCOPEWIDTH; x++) {
 	    for (int y = 0; y < TestGame.SCOPEHEIGHT; y++) {
@@ -44,7 +44,7 @@ public class RLComponent extends JComponent
 		if (startDrawingAtX + x >= 0 && startDrawingAtY + y >= 0) {
 		    if (startDrawingAtX + x < game.getMap().getMapWidth() && startDrawingAtY + y < game.getMap().getMapHeight()) {
 
-			visibleTile = game.getMap().getTileAt(startDrawingAtX + x, startDrawingAtY + y);
+			Tile visibleTile = game.getMap().getTileAt(startDrawingAtX + x, startDrawingAtY + y);
 			if (visibleTile.isSeen()) {
 			    visibleTile.draw(g2d, x, y);
 			    for (Item i : visibleTile.getItems()) {
@@ -207,228 +207,21 @@ public class RLComponent extends JComponent
 	getActionMap().put("moveLeft", moveLeft);
 
 
-
 	//Item actions
 
 	getInputMap().put(KeyStroke.getKeyStroke("COMMA"), "pickUp");
+	getActionMap().put("pickUp", pickUp);
 
-	final Action pressedComma = new AbstractAction()
-	{
-	    @Override public void actionPerformed(ActionEvent e) {
-		if (game.getGameState() == GameState.PICKINGUP) {
-		    game.setGameState(GameState.PLAYING);
-		    game.gameUpdated();
-		} else if (game.getGameState() == GameState.PLAYING) {
-		    game.getPlayer().pickUp();
-		    game.gameUpdated();
-		}
-	    }
-	};
-	getActionMap().put("pickUp", pressedComma);
+	//Enter action
 
-	getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "pickUpSelected");
-	final Action pressedEnter = new AbstractAction()
-	{
-	    @Override public void actionPerformed(ActionEvent e) {
-
-		if (game.getGameState() == GameState.PICKINGUP) {
-		    if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getItems().get(0) instanceof ItemOrbOfZot){
-			//WINNING
-			System.out.println("GAME OVER \nYOU HAVE WON ETERNAL GLORY!");
-			game.getFrame().dispose();
-			System.exit(0);
-		    }
-
-		    game.getPlayer().pickUpSelectedItem();
-		}
-		if (game.getGameState() == GameState.IN_INVENTORY) {
-		    game.getPlayer().useSelectedItem();
-		}
-		if (game.getGameState() == GameState.PLAYERDEAD) {
-		    game.getFrame().dispose();
-		    System.exit(0);
-		}
-		if (game.getGameState() == GameState.PLAYING) {
-
-		    if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getClass()
-			    .isInstance(new StaircaseUp())) {
-			//move up
-			game.changeLevel(game.getLevelNumber() - 1);
-
-		    } else if (game.getMap().getTileAt(game.getPlayer().getX(), game.getPlayer().getY()).getClass()
-			    .isInstance(new StaircaseDown())) {
-			//Move down
-			game.changeLevel(game.getLevelNumber() + 1);
-		    }
-		}
-		game.gameUpdated();
-	    }
-	};
-	getActionMap().put("pickUpSelected", pressedEnter);
+	getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "enterAction");
+	getActionMap().put("enterAction", enterAction);
 
 	//Open inventory
 
 	getInputMap().put(KeyStroke.getKeyStroke("I"), "openInventory");
-
-	final Action pressedI = new AbstractAction()
-	{
-	    @Override public void actionPerformed(ActionEvent e) {
-		if (game.getGameState() == GameState.PLAYING) {
-		    game.getPlayer().getInventoryScreenNavigator().setNavigator(0);
-		    game.setGameState(GameState.IN_INVENTORY);
-		} else if (game.getGameState() == GameState.IN_INVENTORY) {
-		    game.setGameState(GameState.PLAYING);
-
-		}
-		game.gameUpdated();
-	    }
-	};
-	getActionMap().put("openInventory", pressedI);
+	getActionMap().put("openInventory", openInventory);
 
     }
-
-    /*
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD8"), "goNorth");
-    	final Action pressedUp = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(0, -1);
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.getPlayer().decrementInventoryNavigator();
-    		} else if (game.getGameState() == GameState.IN_INVENTORY) {
-    		    game.getPlayer().navigateInvScrUp();
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goNorth", pressedUp);
-
-
-
-
-    	//getInputMap().put(KeyStroke.getKeyStroke("UP"), "goNorth");
-
-    	getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "goSouth");
-    	final Action pressedDown = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(0, 1);
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.getPlayer().incrementInventoryNavigator();
-    		} else if (game.getGameState() == GameState.IN_INVENTORY) {
-    		    game.getPlayer().navigateInvScrDown();
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goSouth", pressedDown);
-
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD2"), "goSouth");
-
-
-    	//Go E or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "goEast");
-    	final Action pressedRight = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(1, 0);
-
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goEast", pressedRight);
-
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD6"), "goEast");
-
-    	//Go west or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "goWest");
-    	final Action pressedLeft = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(-1, 0);
-
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goWest", pressedLeft);
-
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD4"), "goWest");
-
-
-    	//Go NW or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD7"), "goNorthWest");
-    	final Action pressedSeven = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(-1, -1);
-
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goNorthWest", pressedSeven);
-
-    	//Go NE or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD9"), "goNorthEast");
-    	final Action pressedNine = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(1, -1);
-
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goNorthEast", pressedNine);
-
-    	//Go SW or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD1"), "goSouthWest");
-    	final Action pressedOne = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(-1, 1);
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goSouthWest", pressedOne);
-
-
-    	//Go SE or navigate menu
-    	getInputMap().put(KeyStroke.getKeyStroke("NUMPAD3"), "goSouthEast");
-    	final Action pressedThree = new AbstractAction()
-    	{
-    	    @Override public void actionPerformed(ActionEvent e) {
-    		if (game.getGameState() == GameState.PLAYING) {
-    		    game.getPlayer().moveTo(1, 1);
-    		} else if (game.getGameState() == GameState.PICKINGUP) {
-    		    game.setGameState(GameState.PLAYING);
-    		}
-    		game.gameUpdated();
-    	    }
-    	};
-    	getActionMap().put("goSouthEast", pressedThree);
-
-    	*/
-
 }
 

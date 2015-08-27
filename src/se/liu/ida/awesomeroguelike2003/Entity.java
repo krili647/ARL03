@@ -7,18 +7,17 @@ abstract class Entity extends GameObject implements EntityBehaviour
     protected int healthPoints;
     protected int attackPoints;
     protected int x, y;
-    final Game game;
+    protected final Game game;
 
     Entity(final int x, final int y,
            final int healthPoints, final int attackPoints,
-           final String name, final Game game) {
-        super(name);
+           final String name, final int r, final int g, final int b, final Game game) {
+        super(name, r, g, b);
         this.x = x;
         this.y = y;
         this.healthPoints = healthPoints;
         this.attackPoints = attackPoints;
         this.game = game;
-        //game.getMap().getTileAt(x, y).addToEntities(this);
 
     }
 
