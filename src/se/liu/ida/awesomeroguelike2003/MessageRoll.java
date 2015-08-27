@@ -2,10 +2,11 @@ package se.liu.ida.awesomeroguelike2003;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class MessageRoll
 {
-    private ArrayList<String> messageRoll;
+    private List<String> messageRoll;
 
     public MessageRoll(){
 	this.messageRoll = new ArrayList<>();

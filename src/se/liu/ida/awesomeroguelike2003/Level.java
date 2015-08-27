@@ -9,8 +9,6 @@ public class Level
     private int levelNumber;
     private Game game;
     private Map map;
-    private ArrayList<GameObject> listOfItems;
-    private ArrayList<GameObject> listOfEnemies;
 
     public Level(final int levelNumber, final Game game){
         this.random = new Random();
@@ -22,6 +20,7 @@ public class Level
             case 0:
                 addItem(9, 23, new ItemKey(this.game));
                 addItem(7, 7, new ItemKey(this.game));
+                addItem(7, 7, new ItemGoldCoin(this.game));
                 for (int numOfEnemies = 0; numOfEnemies < 1+random.nextInt(3); numOfEnemies++) {
                     addRandomEnemy();
                 }

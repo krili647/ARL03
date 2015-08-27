@@ -5,13 +5,8 @@ import java.util.List;
 
 public class Inventory
 {
-    public Inventory() {}
 
-    public Inventory(List<Item> items) {
-	this.inventory = items;
-    }
-
-    private List<Item> inventory = new ArrayList<Item>();
+    private List<Item> inventory = new ArrayList<>();
 
     private int inventoryNavigator = 0;
 

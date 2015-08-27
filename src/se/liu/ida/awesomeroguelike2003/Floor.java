@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Floor extends Tile
 {
+
     public Floor(){
         super(false, "Floor");
     }

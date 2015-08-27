@@ -13,7 +13,7 @@ public class Enemy extends Entity {
     private Random random;
 
     public Enemy(final int x, final int y, final Game game) {
-        super(x, y, 10, 10, 10, "Enemy", game);
+        super(x, y, 10, 10, "Enemy", game);
         this.random = new Random();
     }
 

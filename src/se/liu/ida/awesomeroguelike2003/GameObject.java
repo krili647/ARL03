@@ -11,4 +11,5 @@ abstract class GameObject implements Drawable
     public String getName() {
 	return name;
     }
+
 }

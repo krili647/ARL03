@@ -6,7 +6,6 @@ package se.liu.ida.awesomeroguelike2003;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Game
 {
@@ -14,15 +13,15 @@ public class Game
     private Player player;
     private GameState gameState;
     private int levelNumber;
-    private RLFrame RLFrame;
+    private RLFrame frame;
     private MessageRoll messageRoll;
     private List<Level> levels;
-    private final int numOfLevels = 3; //This is a fixed number
+    private static final int NUMOFLEVELS = 3; //This is a fixed number
 
-    public int getNumOfLevels() { return numOfLevels; }
+    public int getNumOfLevels() { return NUMOFLEVELS; }
 
-    public RLFrame getRLFrame() {
-        return RLFrame;
+    public RLFrame getFrame() {
+        return frame;
     }
 
     public int getLevelNumber() {
@@ -47,11 +46,9 @@ public class Game
         this.map = map;
     }
 
-    public Player getPlayer() {
+    Player getPlayer() {
         return player;
     }
-
-    public List<Level> getLevels() { return levels; }
 
     public Level getLevel(final int levelNumber) { return levels.get(levelNumber); }
 
@@ -77,15 +74,15 @@ public class Game
 
         for (int dX = -1; dX < 2; dX++) {
             for (int dY = -1; dY < 2; dY++) {
-                if (x + dX > 0 && x + dX < map.getMapWidth()) {
-                    if (y + dY > 0 && y + dY < map.getMapHeight()) {
-                        if (!map.getTileAt(x + dX, y + dY).isSolid()) {
-                            map.getTileAt(x + dX, y + dY).setSeen(true);
+                if (x + dX > 0 && x + dX < getLevel(levelNumber).getMap().getMapWidth()) {
+                    if (y + dY > 0 && y + dY < getLevel(levelNumber).getMap().getMapHeight()) {
+                        if (!getLevel(levelNumber).getMap().getTileAt(x + dX, y + dY).isSolid()) {
+                            getLevel(levelNumber).getMap().getTileAt(x + dX, y + dY).setSeen(true);
                             if (n - 1 > 0) {
                                 traverseMap(x + dX, y + dY, n - 1);
                             }
                         } else {
-                            map.getTileAt(x + dX, y + dY).setSeen(true);
+                            getLevel(levelNumber).getMap().getTileAt(x + dX, y + dY).setSeen(true);
                         }
                     }
                 }
@@ -111,8 +108,8 @@ public class Game
         this.levels = new ArrayList<>();
 
         loadLevels();
-        setLevelNumber(2);
-        setMap(getLevel(levelNumber).getMap());
+        this.levelNumber = 0;
+        this.map = getLevel(levelNumber).getMap();
 
         this.player = new Player(map.getStaircaseUpX(), map.getStaircaseUpY(), this);
 
@@ -125,7 +122,7 @@ public class Game
 
 
         this.paintComponent = new RLComponent(this);
-        this.RLFrame = new RLFrame(this);
+        this.frame = new RLFrame(this);
 
         updateMap();
 
@@ -135,13 +132,13 @@ public class Game
 
     public void changeLevel(final int newLevelNumber){
 
-        if (newLevelNumber > -1 && newLevelNumber < numOfLevels) {
+        if (newLevelNumber > -1 && newLevelNumber < NUMOFLEVELS) {
             //remove player from the previous level
-            getLevel(levelNumber).getMap().getTileAt(getPlayer().getX(), getPlayer().getY())
-                    .removeFromEntities(getPlayer());
+            getLevel(levelNumber).getMap().getTileAt(player.getX(), player.getY())
+                    .removeFromEntities(player);
 
             Level nextLevel = getLevel(newLevelNumber);
-            setMap(getLevel(newLevelNumber).getMap());
+            this.map = getLevel(newLevelNumber).getMap();
 
             int startLocationX;
             int startLocationY;
@@ -154,9 +151,9 @@ public class Game
                 startLocationY = nextLevel.getMap().getStaircaseUpY();
             }
 
-            getPlayer().setX(startLocationX);
-            getPlayer().setY(startLocationY);
-            nextLevel.getMap().getTileAt(startLocationX, startLocationY).addToEntities(getPlayer());
+            player.setX(startLocationX);
+            player.setY(startLocationY);
+            nextLevel.getMap().getTileAt(startLocationX, startLocationY).addToEntities(player);
 
             levelNumber = newLevelNumber;
 
@@ -167,17 +164,17 @@ public class Game
 
     public void loadLevels() {
         //Create levels, put enemies and items on every level
-        for (int levelNumber = 0; levelNumber < getNumOfLevels(); levelNumber++){
+        for (int levelNumber = 0; levelNumber < NUMOFLEVELS; levelNumber++){
             this.levels.add(levelNumber, new Level(levelNumber, this));
         }
 
     }
 
     private void updateAI() {
-        for (int x = 0; x < map.getMapWidth(); x++) {
-            for (int y = 0; y < map.getMapHeight(); y++) {
-                if (map.getTileAt(x, y).getEntityHere() != null) {
-                    map.getTileAt(x, y).getEntityHere().EntityAI();
+        for (int x = 0; x < getLevel(levelNumber).getMap().getMapWidth(); x++) {
+            for (int y = 0; y < getLevel(levelNumber).getMap().getMapHeight(); y++) {
+                if (getLevel(levelNumber).getMap().getTileAt(x, y).getEntityHere() != null) {
+                    getLevel(levelNumber).getMap().getTileAt(x, y).getEntityHere().EntityAI();
                 }
             }
         }

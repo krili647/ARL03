@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Map
 {
@@ -50,7 +49,7 @@ public class Map
 
         //Maps consists of two dimensional arrays of numbers
         //It reads the numbers and translates them to different tile types
-        List<Integer> numbers = new ArrayList<Integer>();
+        List<Integer> numbers = new ArrayList<>();
         try {
             for (String line : Files.readAllLines(Paths.get("src/se/liu/ida/awesomeroguelike2003/maps/Map" + levelNumber), Charset.defaultCharset())) {
                 for (String part : line.split("\\s+")) {
